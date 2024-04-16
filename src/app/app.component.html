@@ -7,7 +7,7 @@
 <!-- * * * * * * * to get started with your project! * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<style>
+<!-- <style>
   :host {
     --bright-blue: oklch(51.01% 0.274 263.83);
     --electric-violet: oklch(53.18% 0.28 296.97);
@@ -175,41 +175,65 @@
       margin-block: 1.5rem;
     }
   }
-</style>
+</style> -->
 
 <main>
-  <section class="search">
-      <input type="text" placeholder="PLZ und/oder Ort">
+  <!-- Header für Logo und Suchfeld -->
+  <header class="header">
+    <div class="logo">
+        <img src="assets/WhatsApp Image 2024-03-15 at 12.57.00.png" alt="Firmenlogo">
+    </div>
+    
+    <section class="search">
+      <input type="text" placeholder="ZIP code or location">
       <button>🔍</button>
       <select name="fuel-type" id="fuel-type">
-          <option value="type">Sprit Art</option>
+          <option value="type">Fuel Type</option>
           <!-- Add more options here -->
       </select>
       <select name="radius" id="radius">
-          <option value="radius">Umkreis</option>
+          <option value="radius">Radius</option>
           <!-- Add more options here -->
       </select>
-  </section>
+    </section>
+  </header>
+
+  <!-- Hauptinhalt für Tankstellen -->
+  <div class="TankApi">
   <section class="stations">
       <!-- Repeat for each station -->
-      <div class="station">
-          <p>TANKSTELLE</p>
-      </div>
+      <!-- <div class="station">
+          <p>Petrol station</p>
+      </div> -->
   </section>
+  
   <section class="map">
       <!-- Your map integration goes here -->
   </section>
+
   <div>
-    <h2>Tankstellen</h2>
-    <ul>
-      <li *ngFor="let station of stations">
-        <h3>{{ station.name }} ({{ station.brand }})</h3>
-        <p>{{ station.street }}, {{ station.place }}, {{ station.postCode }}</p>
-        <p>Preis: {{ station.price }}€</p>
-        <p>Geöffnet: {{ station.isOpen ? 'Ja' : 'Nein' }}</p>
-        <p>Entfernung: {{ station.dist }} km</p>
-      </li>
-    </ul>
+    <h2>Petrol stations</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Price</th>
+          <th>Open</th>
+          <th>Distance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let station of stations">
+          <td>{{ station.name }} ({{ station.brand }})</td>
+          <td>{{ station.street }}, {{ station.place }}, {{ station.postCode }}</td>
+          <td>{{ station.price }}€</td>
+          <td>{{ station.isOpen ? 'Yes' : 'No' }}</td>
+          <td>{{ station.dist }} km</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
   </div>
 </main>
 

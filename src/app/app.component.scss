@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .header {
+    border-top: none; /* Entfernen Sie diese Linie, wenn der Header direkt am oberen Rand sein soll */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0; /* Hintergrundfarbe des Headers */
+    padding: 10px 20px; /* Sie hatten dies auskommentiert; stellen Sie sicher, dass es keine unbeabsichtigten Ränder gibt */
+  }
+
+  .TankApi {
+    /* position: fixed; Entfernen, damit es mit dem Inhalt scrollt */
+    width: 100%;
+    /* padding-top entfernen, wenn es nicht länger fest positioniert ist */
+    box-sizing: border-box;
+    /* Weitere Stilangaben hinzufügen */
+  }
+  
+  
+  .logo {
+    flex: 1; /* Logo nimmt den verfügbaren Platz auf der linken Seite ein */
+  }
+  
+  .logo img {
+    width: 100px; /* Stellen Sie die gewünschte Größe Ihres Logos ein */
+  }
+  
+  .search {
+    flex: 3; /* Suchbereich nimmt den verbleibenden Platz ein */
+    display: flex;
+    justify-content: flex-end; /* Suchfelder rechtsbündig */
+    gap: 10px; /* Abstand zwischen Suchelementen */
+  }
+  
+  .stations {
+    margin-top: 20px; /* Abstand zwischen Header und Tankstellenliste */
+    padding: 10px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  table, th, td {
+    border: 1px solid black;
+  }
+  
+  th, td {
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f0f0f0;
+  }
+  
