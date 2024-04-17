@@ -59,4 +59,10 @@
   th {
     background-color: #f0f0f0;
   }
+
+  .header-buttons button {
+    margin-left: 10px; /* Space between buttons */
+    padding: 5px 10px;
+    cursor: pointer; /* Pointer cursor on hover */
+}
   
