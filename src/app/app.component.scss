@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    // background-color: #FFF3E0;
   }
   
   .header {
@@ -9,7 +10,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    background-color: #f0f0f0; /* Hintergrundfarbe des Headers */
+    background-color: #c3f6ff94; /* Hintergrundfarbe des Headers */
     padding: 10px 20px; /* Sie hatten dies auskommentiert; stellen Sie sicher, dass es keine unbeabsichtigten Ränder gibt */
   }
 
@@ -31,10 +32,12 @@
   }
   
   .search {
-    flex: 3; /* Suchbereich nimmt den verbleibenden Platz ein */
+    max-width: 500px;
     display: flex;
-    justify-content: flex-end; /* Suchfelder rechtsbündig */
-    gap: 10px; /* Abstand zwischen Suchelementen */
+    justify-content: space-between; 
+    gap: 20px; 
+    padding: 10px; 
+    align-items: center;
   }
   
   .stations {
@@ -64,5 +67,10 @@
     margin-left: 10px; /* Space between buttons */
     padding: 5px 10px;
     cursor: pointer; /* Pointer cursor on hover */
+    
+    
+    .scrollTankstelle {
+  overflow-y: auto;
 }
-  
+}
+
