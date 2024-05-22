@@ -14,6 +14,7 @@ import { MapService } from './map.service';
     HttpClientModule, // Fügen Sie HttpClientModule zu den Imports hinzu
     RouterOutlet
   ],
+  providers: [MapService],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
@@ -73,4 +74,18 @@ export class AppComponent implements OnInit {
     });
     console.log("Hallooooo")
   }
+
+  async geocode(adresse : string) {
+    try {
+      // const telekomLETest = await this.mapService.geocodeLatLng({ lat: 52.5200, lng:  13.4050 });
+      const telekomAdress = await this.mapService.geocodeAddress(adresse)
+      // console.log("Hallo", telekomLETest);
+      console.log(telekomAdress);
+      
+    } catch (error) {
+      console.error("Fehler bei der Geocodierung:", error);
+    }
+    console.log(adresse)
+  }
+
 }

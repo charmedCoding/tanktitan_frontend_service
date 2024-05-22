@@ -192,8 +192,8 @@
     </div> -->
 
     <section class="search">
-      <input type="text" placeholder="ZIP code or location">
-      <button>🔍</button>
+      <input type="text" placeholder="ZIP code or location" #addressInput>
+<button (click)="geocode(addressInput.value)">🔍</button>
       <select name="fuel-type" id="fuel-type">
         <option value="" disabled selected>Fuel Type</option> 
         <option value="gasoline">Gasoline</option>
