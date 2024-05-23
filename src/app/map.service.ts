@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Loader } from '@googlemaps/js-api-loader';
 import { environment } from '../environments/environment';
 import { GeocoderResponse } from './geocoderResponse.model';
-import { HttpClient } from '@angular/common/http';  // Korrektur hier
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class MapService {
   private geocoder!: google.maps.Geocoder;
   private placesService!: google.maps.places.PlacesService;
 
-  constructor(private http: HttpClient) {  // Korrektur hier
+  constructor(private http: HttpClient) {
     this.loader = new Loader({
       apiKey: this.apiKey,
       version: "weekly",
@@ -45,8 +45,6 @@ export class MapService {
     }
   }
 
-
-  //Adresse, wenn adresse nicht vorhanden dann nehme: lat: 48.7758, lng: 9.1829
   getMap(): Promise<google.maps.Map> {
     return this.loader.load().then(() => {
       const mapElement = document.getElementById('map') as HTMLElement;
@@ -80,7 +78,6 @@ export class MapService {
     });
   }
 
-
   async geocodeAddress(address: string): Promise<{ lat: number, lng: number }> {
     await this.initializeGeocoder();
     return new Promise((resolve, reject) => {
@@ -102,8 +99,73 @@ export class MapService {
     }
   }
 
+  searchNearby(location: google.maps.LatLng, radius: number): void {
+    const request = {
+      location: location,
+      radius: radius,
+      type: 'gas_station',  // Set the type to 'gas_station' to search for gas stations
+    };
+
+    this.placesService.nearbySearch(request, (results, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+        results.forEach(place => {
+          if (place.geometry && place.geometry.location) {
+            const marker = new google.maps.Marker({
+              position: place.geometry.location,
+              map: this.map,
+              title: place.name
+            });
+
+            const infowindow = new google.maps.InfoWindow({
+              content: `<div><strong>${place.name}</strong><br>
+                        ${place.vicinity}<br>
+                        Rating: ${place.rating}</div>`
+            });
+
+            marker.addListener('click', () => {
+              this.map.setCenter(marker.getPosition() as google.maps.LatLng);
+              this.map.setZoom(15); // Setzen Sie das gewünschte Zoom-Level
+              infowindow.open(this.map, marker);
+            });
+          }
+        });
+      } else {
+        console.error('Places search failed due to: ' + status);
+      }
+    });
+  }
+
+  addMarkers(stations: any[]): void {
+    if (this.map) {
+      stations.forEach(station => {
+        const marker = new google.maps.Marker({
+          position: { lat: station.lat, lng: station.lng },
+          map: this.map,
+          title: station.name
+        });
+
+        const infowindow = new google.maps.InfoWindow({
+          content: `<div><strong>${station.name}</strong><br>
+                    ${station.vicinity}<br>
+                    Rating: ${station.rating}</div>`
+        });
+
+        marker.addListener('click', () => {
+          this.map.setCenter(marker.getPosition() as google.maps.LatLng);
+          this.map.setZoom(15); // Setzen Sie das gewünschte Zoom-Level
+          infowindow.open(this.map, marker);
+        });
+
+        marker.setMap(this.map);
+      });
+    } else {
+      console.error('Map not initialized');
+    }
+  }
+
+
   getLocation(term: string): Observable<GeocoderResponse> {
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=${environment.GMAPS_API_KEY}`;
     return this.http.get<GeocoderResponse>(url);
-  } 
+  }
 }

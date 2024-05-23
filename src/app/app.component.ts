@@ -36,14 +36,13 @@ export class AppComponent implements OnInit {
     this.http.get<any>("http://localhost:8081/api/stations?lat=48.7758&lng=9.1829&rad=200&sort=dist&type=diesel").subscribe({
       next: (response) => {
         this.stations = response;
-        console.log(this.stations);
+        this.addStationMarkers();
       },
       error: (error) => {
         console.error('Fehler beim Laden der Tankstellendaten:', error);
       }
     });
   }
-
   async initMap(): Promise<void> {
     try {
       await this.mapService.initMap();
@@ -56,6 +55,7 @@ export class AppComponent implements OnInit {
 
   loadAndDisplayMaps(): void {
     this.mapService.getMap().then(map => {
+     
       console.log('Google Map geladen und angezeigt');
      
       // Hier kannst du weitere Aktionen mit der Karte durchführen, wie Marker hinzufügen usw.
@@ -84,11 +84,20 @@ export class AppComponent implements OnInit {
     console.log("Hallooooo")
   }
 
+  
+  addStationMarkers(): void {
+    if (this.stations.length && this.mapService) {
+      this.mapService.addMarkers(this.stations);
+    } else {
+      console.error('Keine Tankstelleninformationen verfügbar oder MapService nicht initialisiert');
+    }
+  }
+
   async geocode(address: string) {
     try {
       const location = await this.mapService.geocodeAddress(address);
       await this.mapService.initMap(location.lat, location.lng);
-      console.log(location);
+      this.loadAndDisplayStations();
     } catch (error) {
       console.error("Fehler bei der Geocodierung:", error);
     }
