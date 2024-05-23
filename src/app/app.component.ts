@@ -28,12 +28,12 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient, private mapService: MapService) {}
 
   ngOnInit() {
-    this.loadAndDisplayStations();
+    // this.loadAndDisplayStations();
     this.loadAndDisplayMaps();
   }
 
-  loadAndDisplayStations(): void {
-    this.http.get<any>("http://localhost:8081/api/stations?lat=48.7758&lng=9.1829&rad=200&sort=dist&type=diesel").subscribe({
+  loadAndDisplayStations(lat: number, lng: number): void {
+    this.http.get<any>(`http://localhost:8081/api/stations?lat=${lat}&lng=${lng}&rad=200&sort=dist&type=diesel`).subscribe({
       next: (response) => {
         this.stations = response;
         this.addStationMarkers();
@@ -43,6 +43,7 @@ export class AppComponent implements OnInit {
       }
     });
   }
+
   async initMap(): Promise<void> {
     try {
       await this.mapService.initMap();
@@ -97,7 +98,8 @@ export class AppComponent implements OnInit {
     try {
       const location = await this.mapService.geocodeAddress(address);
       await this.mapService.initMap(location.lat, location.lng);
-      this.loadAndDisplayStations();
+      this.mapService.searchNearby({ lat: location.lat, lng: location.lng } as unknown as google.maps.LatLng, 1000);
+      this.loadAndDisplayStations(location.lat, location.lng);
     } catch (error) {
       console.error("Fehler bei der Geocodierung:", error);
     }
