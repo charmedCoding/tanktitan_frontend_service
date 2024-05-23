@@ -20,7 +20,7 @@ import { MapService } from './map.service';
 })
 export class AppComponent implements OnInit {
   
-  title = 'tanktitan_frontend_service';
+  title = 'tanktitan';
   public stations: any[] = []; // Anpassung auf den spezifischen Typ, wenn möglich
   public maps: any[] = [];
   service: any;
@@ -35,13 +35,22 @@ export class AppComponent implements OnInit {
   loadAndDisplayStations(): void {
     this.http.get<any>("http://localhost:8081/api/stations?lat=48.7758&lng=9.1829&rad=200&sort=dist&type=diesel").subscribe({
       next: (response) => {
-        this.stations = response; // Hier ist die Korrektur
+        this.stations = response;
         console.log(this.stations);
       },
       error: (error) => {
         console.error('Fehler beim Laden der Tankstellendaten:', error);
       }
     });
+  }
+
+  async initMap(): Promise<void> {
+    try {
+      await this.mapService.initMap();
+      console.log('Google Map geladen und angezeigt');
+    } catch (error) {
+      console.error('Fehler beim Laden der Google Map:', error);
+    }
   }
   
 
@@ -75,17 +84,13 @@ export class AppComponent implements OnInit {
     console.log("Hallooooo")
   }
 
-  async geocode(adresse : string) {
+  async geocode(address: string) {
     try {
-      // const telekomLETest = await this.mapService.geocodeLatLng({ lat: 52.5200, lng:  13.4050 });
-      const telekomAdress = await this.mapService.geocodeAddress(adresse)
-      // console.log("Hallo", telekomLETest);
-      console.log(telekomAdress);
-      
+      const location = await this.mapService.geocodeAddress(address);
+      await this.mapService.initMap(location.lat, location.lng);
+      console.log(location);
     } catch (error) {
       console.error("Fehler bei der Geocodierung:", error);
     }
-    console.log(adresse)
   }
-
 }

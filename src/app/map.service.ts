@@ -23,19 +23,26 @@ export class MapService {
     });
   }
 
-  async initMap(): Promise<google.maps.Map> {
+  async initMap(lat: number = 48.7758, lng: number = 9.1829): Promise<google.maps.Map> {
     await this.loader.load();
     const mapElement = document.getElementById('map') as HTMLElement;
     if (!mapElement) {
       throw new Error('Map element not found');
     }
     this.map = new google.maps.Map(mapElement, {
-      center: { lat: 48.7758, lng: 9.1829 },
-      zoom: 8,
+      center: { lat: lat, lng: lng },
+      zoom: 15,
     });
     this.placesService = new google.maps.places.PlacesService(this.map);
     this.geocoder = new google.maps.Geocoder();
     return this.map;
+  }
+
+  async initializeGeocoder() {
+    if (!this.geocoder) {
+      await this.loader.load();
+      this.geocoder = new google.maps.Geocoder();
+    }
   }
 
 
@@ -74,11 +81,10 @@ export class MapService {
   }
 
 
-  geocodeAddress(address: string): Promise<{ lat: number, lng: number }> {
-    let geocoder = new google.maps.Geocoder();
-
+  async geocodeAddress(address: string): Promise<{ lat: number, lng: number }> {
+    await this.initializeGeocoder();
     return new Promise((resolve, reject) => {
-      geocoder.geocode({ address: address }, (results, status) => {
+      this.geocoder.geocode({ address: address }, (results, status) => {
         if (status === google.maps.GeocoderStatus.OK && results && results[0]) {
           const location = results[0].geometry.location;
           resolve({ lat: location.lat(), lng: location.lng() });
@@ -89,12 +95,15 @@ export class MapService {
     });
   }
 
+  setMapCenterAndZoom(lat: number, lng: number, zoom: number): void {
+    if (this.map) {
+      this.map.setCenter({ lat: lat, lng: lng });
+      this.map.setZoom(zoom);
+    }
+  }
+
   getLocation(term: string): Observable<GeocoderResponse> {
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=${environment.GMAPS_API_KEY}`;
     return this.http.get<GeocoderResponse>(url);
-  }
-
-
-
-  
+  } 
 }
