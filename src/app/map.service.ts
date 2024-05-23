@@ -119,13 +119,17 @@ export class MapService {
             const infowindow = new google.maps.InfoWindow({
               content: `<div><strong>${place.name}</strong><br>
                         ${place.vicinity}<br>
-                        Rating: ${place.rating}</div>`
+                        Rating: ${place.rating}<br>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=${place.geometry.location.lat()},${place.geometry.location.lng()}" target="_blank">Navigation</a></div>`
             });
 
             marker.addListener('click', () => {
-              this.map.setCenter(marker.getPosition() as google.maps.LatLng);
-              this.map.setZoom(15); // Setzen Sie das gewünschte Zoom-Level
-              infowindow.open(this.map, marker);
+              if (place.geometry && place.geometry.location) {
+                const position = place.geometry.location;
+                this.map.setCenter(position);
+                this.map.setZoom(15); // Setzen Sie das gewünschte Zoom-Level
+                infowindow.open(this.map, marker);
+              }
             });
           }
         });
@@ -147,11 +151,13 @@ export class MapService {
         const infowindow = new google.maps.InfoWindow({
           content: `<div><strong>${station.name}</strong><br>
                     ${station.vicinity}<br>
-                    Rating: ${station.rating}</div>`
+                    Rating: ${station.rating}<br>
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=${station.lat},${station.lng}" target="_blank">Navigation</a></div>`
         });
 
         marker.addListener('click', () => {
-          this.map.setCenter(marker.getPosition() as google.maps.LatLng);
+          const position = new google.maps.LatLng(station.lat, station.lng);
+          this.map.setCenter(position);
           this.map.setZoom(15); // Setzen Sie das gewünschte Zoom-Level
           infowindow.open(this.map, marker);
         });
