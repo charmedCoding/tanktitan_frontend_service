@@ -62,6 +62,10 @@
   th {
     background-color: #f0f0f0;
   }
+  
+  .pointer-cursor {
+  cursor: pointer;
+}
 
   .header-buttons button {
     margin-left: 10px; /* Space between buttons */
@@ -72,5 +76,7 @@
     .scrollTankstelle {
   overflow-y: auto;
 }
+
+
 }
 

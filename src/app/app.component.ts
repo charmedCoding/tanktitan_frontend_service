@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http'; // Importieren Sie HttpClientModule
+import { HttpClientModule } from '@angular/common/http'; 
 import { MapService } from './map.service';
+import { Geolocation } from '@capacitor/geolocation';
+
 
 
 @Component({
@@ -11,7 +13,7 @@ import { MapService } from './map.service';
   standalone: true,
   imports: [
     CommonModule,
-    HttpClientModule, // Fügen Sie HttpClientModule zu den Imports hinzu
+    HttpClientModule, 
     RouterOutlet
   ],
   providers: [MapService],
@@ -21,7 +23,7 @@ import { MapService } from './map.service';
 export class AppComponent implements OnInit {
   
   title = 'tanktitan';
-  public stations: any[] = []; // Anpassung auf den spezifischen Typ, wenn möglich
+  public stations: any[] = []; 
   public maps: any[] = [];
   service: any;
 
@@ -59,7 +61,7 @@ export class AppComponent implements OnInit {
      
       console.log('Google Map geladen und angezeigt');
      
-      // Hier kannst du weitere Aktionen mit der Karte durchführen, wie Marker hinzufügen usw.
+      
     }).catch(error => {
       console.error('Fehler beim Laden der Google Map:', error);
     });
@@ -103,5 +105,23 @@ export class AppComponent implements OnInit {
     } catch (error) {
       console.error("Fehler bei der Geocodierung:", error);
     }
+  }
+
+  async locateMe() {
+    try {
+      const coordinates = await Geolocation.getCurrentPosition();
+      const lat = coordinates.coords.latitude;
+      const lng = coordinates.coords.longitude;
+      console.log(`Geolocation: ${lat}, ${lng}`);
+      await this.mapService.initMap(lat, lng); 
+      this.mapService.setMapCenterAndZoom(lat, lng, 15);
+      this.loadAndDisplayStations(lat, lng); 
+    } catch (error) {
+      console.error('Error getting location', error);
+    }
+  }
+
+  panToStation(station: any) {
+    this.mapService.setMapCenterAndZoom(station.lat, station.lng, 15);
   }
 }

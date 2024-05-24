@@ -103,7 +103,7 @@ export class MapService {
     const request = {
       location: location,
       radius: radius,
-      type: 'gas_station',  // Set the type to 'gas_station' to search for gas stations
+      type: 'gas_station',  
     };
 
     this.placesService.nearbySearch(request, (results, status) => {
@@ -118,7 +118,7 @@ export class MapService {
 
             const infowindow = new google.maps.InfoWindow({
               content: `<div><strong>${place.name}</strong><br>
-                        ${place.vicinity}<br>
+                        <br>
                         Rating: ${place.rating}<br>
                         <a href="https://www.google.com/maps/dir/?api=1&destination=${place.geometry.location.lat()},${place.geometry.location.lng()}" target="_blank">Navigation</a></div>`
             });
@@ -127,7 +127,7 @@ export class MapService {
               if (place.geometry && place.geometry.location) {
                 const position = place.geometry.location;
                 this.map.setCenter(position);
-                this.map.setZoom(15); // Setzen Sie das gewünschte Zoom-Level
+                this.map.setZoom(15); 
                 infowindow.open(this.map, marker);
               }
             });
@@ -150,7 +150,6 @@ export class MapService {
 
         const infowindow = new google.maps.InfoWindow({
           content: `<div><strong>${station.name}</strong><br>
-                    ${station.vicinity}<br>
                     Rating: ${station.rating}<br>
                     <a href="https://www.google.com/maps/dir/?api=1&destination=${station.lat},${station.lng}" target="_blank">Navigation</a></div>`
         });
@@ -158,7 +157,7 @@ export class MapService {
         marker.addListener('click', () => {
           const position = new google.maps.LatLng(station.lat, station.lng);
           this.map.setCenter(position);
-          this.map.setZoom(15); // Setzen Sie das gewünschte Zoom-Level
+          this.map.setZoom(15);
           infowindow.open(this.map, marker);
         });
 
@@ -167,11 +166,5 @@ export class MapService {
     } else {
       console.error('Map not initialized');
     }
-  }
-
-
-  getLocation(term: string): Observable<GeocoderResponse> {
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=${environment.GMAPS_API_KEY}`;
-    return this.http.get<GeocoderResponse>(url);
   }
 }

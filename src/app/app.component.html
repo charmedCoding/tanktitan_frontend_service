@@ -194,6 +194,8 @@
     <section class="search">
       <input type="text" placeholder="ZIP code or location" #addressInput>
 <button (click)="geocode(addressInput.value)">🔍</button>
+<button (click)="locateMe()">Locate Me</button>
+<!-- <div id="map" style="height: 500px; width: 100%;"></div> -->
       <select name="fuel-type" id="fuel-type">
         <option value="" disabled selected>Fuel Type</option> 
         <option value="gasoline">Gasoline</option>
@@ -237,8 +239,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let station of stations">
-          <td>{{ station.name }} ({{ station.brand }})</td>
-          <td>{{ station.street }}, {{ station.place }}, {{ station.postCode }}</td>
+          <td (click)="panToStation(station)"class="pointer-cursor">{{ station.name }} ({{ station.brand }})</td>
+          <td (click)="panToStation(station)"class="pointer-cursor">{{ station.street }}, {{ station.place }}, {{ station.postCode }}</td>
           <td>{{ station.price }}€</td>
           <td>{{ station.isOpen ? 'Yes' : 'No' }}</td>
           <td>{{ station.dist }} km</td>
