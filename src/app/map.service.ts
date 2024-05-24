@@ -14,6 +14,7 @@ export class MapService {
   private map!: google.maps.Map;
   private geocoder!: google.maps.Geocoder;
   private placesService!: google.maps.places.PlacesService;
+  private markers: google.maps.Marker[] = [];
 
   constructor(private http: HttpClient) {
     this.loader = new Loader({
@@ -99,7 +100,15 @@ export class MapService {
     }
   }
 
+  clearMarkers(): void {
+    // Entferne alle vorhandenen Marker von der Karte
+    this.markers.forEach(marker => marker.setMap(null));
+    this.markers = [];
+  }
+
   searchNearby(location: google.maps.LatLng, radius: number): void {
+    this.clearMarkers(); // Entferne vorherige Marker
+
     const request = {
       location: location,
       radius: radius,
@@ -113,12 +122,16 @@ export class MapService {
             const marker = new google.maps.Marker({
               position: place.geometry.location,
               map: this.map,
-              title: place.name
+              title: place.name,
+              icon: {
+                url: 'assets/icons8-gas-station-50 (1).png', // Pfad zu Ihrem benutzerdefinierten Icon
+                scaledSize: new google.maps.Size(32, 32) // Größe des Icons anpassen
+              }
             });
+            this.markers.push(marker); // Füge den neuen Marker zur Liste hinzu
 
             const infowindow = new google.maps.InfoWindow({
               content: `<div><strong>${place.name}</strong><br>
-                        <br>
                         Rating: ${place.rating}<br>
                         <a href="https://www.google.com/maps/dir/?api=1&destination=${place.geometry.location.lat()},${place.geometry.location.lng()}" target="_blank">Navigation</a></div>`
             });
@@ -127,7 +140,7 @@ export class MapService {
               if (place.geometry && place.geometry.location) {
                 const position = place.geometry.location;
                 this.map.setCenter(position);
-                this.map.setZoom(15); 
+                this.map.setZoom(15);
                 infowindow.open(this.map, marker);
               }
             });
@@ -140,13 +153,20 @@ export class MapService {
   }
 
   addMarkers(stations: any[]): void {
+    this.clearMarkers(); // Entferne vorherige Marker
+
     if (this.map) {
       stations.forEach(station => {
         const marker = new google.maps.Marker({
           position: { lat: station.lat, lng: station.lng },
           map: this.map,
-          title: station.name
+          title: station.name,
+          icon: {
+            url: 'assets/icons8-gas-station-50 (1).png', 
+            scaledSize: new google.maps.Size(32, 32) 
+          }
         });
+        this.markers.push(marker); // Füge den neuen Marker zur Liste hinzu
 
         const infowindow = new google.maps.InfoWindow({
           content: `<div><strong>${station.name}</strong><br>
