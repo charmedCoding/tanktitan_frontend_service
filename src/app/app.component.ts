@@ -6,8 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { MapService } from './map.service';
 import { Geolocation } from '@capacitor/geolocation';
 
-
-
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -30,13 +28,14 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient, private mapService: MapService) {}
 
   ngOnInit() {
-    // this.loadAndDisplayStations();
     this.loadAndDisplayMaps();
+    this.loadAndDisplayStations(48.7758, 9.1829); // Stuttgart coordinates
   }
 
   loadAndDisplayStations(lat: number, lng: number): void {
     this.http.get<any>(`http://localhost:8081/api/stations?lat=${lat}&lng=${lng}&rad=200&sort=dist&type=diesel`).subscribe({
       next: (response) => {
+        console.log('Stations response:', response);
         this.stations = response;
         this.addStationMarkers();
       },
@@ -55,17 +54,12 @@ export class AppComponent implements OnInit {
     }
   }
   
-
   loadAndDisplayMaps(): void {
     this.mapService.getMap().then(map => {
-     
       console.log('Google Map geladen und angezeigt');
-     
-      
     }).catch(error => {
       console.error('Fehler beim Laden der Google Map:', error);
     });
-
   }
 
   async searchPlaces(query: string): Promise<google.maps.places.PlaceResult[]> {
@@ -84,10 +78,8 @@ export class AppComponent implements OnInit {
         }
       });
     });
-    console.log("Hallooooo")
   }
 
-  
   addStationMarkers(): void {
     if (this.stations.length && this.mapService) {
       this.mapService.addMarkers(this.stations);
@@ -122,6 +114,12 @@ export class AppComponent implements OnInit {
   }
 
   panToStation(station: any) {
-    this.mapService.setMapCenterAndZoom(station.lat, station.lng, 15);
+    console.log('Station:', station);
+    if (station.lat && station.lng) {
+      console.log(`Panning to station at ${station.lat}, ${station.lng}`);
+      this.mapService.setMapCenterAndZoom(station.lat, station.lng, 15);
+    } else {
+      console.error('Koordinaten nicht gefunden für die Station:', station);
+    }
   }
 }

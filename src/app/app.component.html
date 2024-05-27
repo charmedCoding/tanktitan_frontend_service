@@ -225,28 +225,28 @@
     }
   </style>
 
-  <div class = "scrollTankstelle">
-    <h2>Petrol stations</h2>
-    <table>
+<div class="scrollTankstelle">
+  <h2>Petrol stations</h2>
+  <table>
       <thead>
-        <tr>
-          <th>Name</th>
-          <th>Address</th>
-          <th>Price</th>
-          <th>Open</th>
-          <th>Distance</th>
-        </tr>
+          <tr>
+              <th>Name & Address</th>
+              <th>Details</th>
+          </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let station of stations">
-          <td (click)="panToStation(station)"class="pointer-cursor">{{ station.name }} ({{ station.brand }})</td>
-          <td (click)="panToStation(station)"class="pointer-cursor">{{ station.street }}, {{ station.place }}, {{ station.postCode }}</td>
-          <td>{{ station.price }}€</td>
-          <td>{{ station.isOpen ? 'Yes' : 'No' }}</td>
-          <td>{{ station.dist }} km</td>
-        </tr>
+          <tr *ngFor="let station of stations">
+              <td (click)="panToStation(station)" class="pointer-cursor">
+                  <div>{{ station.name }} ({{ station.brand }})</div>
+                  <div>{{ station.street }}, {{ station.place }}, {{ station.postCode }}</div>
+              </td>
+              <td>
+                  <div>{{ station.price }}€</div>
+                  <div>{{ station.dist }} km</div>
+              </td>
+          </tr>
       </tbody>
-    </table>
+  </table>
 </div>
   </div>
 </main>
