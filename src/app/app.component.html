@@ -181,8 +181,12 @@
   <!-- Header für Logo und Suchfeld -->
   <header class="header">
     <div class="logo">
-        <img src="assets/WhatsApp Image 2024-03-15 at 12.57.00.png" alt="Firmenlogo">
+        <img src="assets/petrol_pump.jpg" alt="Firmenlogo">
+       
     </div>
+    <div class="title">
+    <h1 >Tank Titan</h1>
+  </div>
     
     <!-- Adding buttons next to the logo -->
     <!-- <div class="header-buttons">
@@ -191,63 +195,72 @@
         <button>Settings</button>
     </div> -->
 
-    <section class="search">
-      <input type="text" placeholder="ZIP code or location" #addressInput>
-<button (click)="geocode(addressInput.value)">🔍</button>
-<button (click)="locateMe()">Locate Me</button>
-<!-- <div id="map" style="height: 500px; width: 100%;"></div> -->
-      <select name="fuel-type" id="fuel-type">
-        <option value="" disabled selected>Fuel Type</option> 
-        <option value="gasoline">Gasoline</option>
-        <option value="diesel">Diesel fuel</option>
-      </select>
-      <select name="radius" id="radius">
-          <option value="radius">Radius</option>
-      </select>
-    </section>
+   
 </header>
 
-
-  <div id="map" style="width: 100%; height: 400px;"></div>
-  <div class="TankApi">
-  <section class="stations">
+<div class="elements">
+  <div class="left">
+    <div class="userInput">
+      <section class="search">
+        <!-- <input type="text" placeholder="search address" (keydown.enter)="onEnter()" #addressInput class="searchInput"> -->
+        <input type="text" placeholder="search address" (keydown.enter)="geocode(addressInput.value)" #addressInput class="searchInput">
+      <!-- <button (click)="geocode(addressInput.value)" #submitButton>🔍</button> -->
+    </section>
+    <div name="buttonOptions">
+      <button (click)="locateMe()" class="location">Your location</button>
+      <!-- <div id="map" style="height: 500px; width: 100%;"></div> -->
+        <select name="fuel-type" id="fuel-type" class="fuel">
+          <option value="" disabled selected>Fuel</option> 
+          <option value="gasoline">Gasoline</option>
+          <option value="diesel">Diesel</option>
+        </select>
+        <!-- <select name="radius" id="radius">
+            <option value="radius">Radius</option>
+        </select> -->
+      </div>
+        
+      </div>
+<div class = "scrollTankstelle">
+  <h4>Petrol stations</h4>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Price</th>
+        <th>Distance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let station of stations">
+        <td (click)="panToStation(station)"class="pointer-cursor">{{ station.name }} ({{ station.brand }})</td>
+        <td (click)="panToStation(station)"class="pointer-cursor">{{ station.street }}, {{ station.place }}, {{ station.postCode }}</td>
+        <td>{{ station.price }}€</td>
+        <td>{{ station.isOpen ? 'Yes' : 'No' }}</td>
+        <td>{{ station.dist }} km</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+  <div id="map" style="width: 100%; height: 400px; margin: 1vh"></div>
+  <!-- <div class="TankApi"> -->
+  <!-- <section class="stations">
   
-  </section>
+  </section> -->
   
-  <section class="map">
+  <!-- <section class="map">
    
-  </section>
+  </section> -->
 
-  <style>
+  <!-- <style>
     .scrollTankstelle {
       max-height: 300px; 
       overflow-y: auto;
     }
-  </style>
+  </style> -->
 
-  <div class = "scrollTankstelle">
-    <h2>Petrol stations</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Address</th>
-          <th>Price</th>
-          <th>Open</th>
-          <th>Distance</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let station of stations">
-          <td (click)="panToStation(station)"class="pointer-cursor">{{ station.name }} ({{ station.brand }})</td>
-          <td (click)="panToStation(station)"class="pointer-cursor">{{ station.street }}, {{ station.place }}, {{ station.postCode }}</td>
-          <td>{{ station.price }}€</td>
-          <td>{{ station.isOpen ? 'Yes' : 'No' }}</td>
-          <td>{{ station.dist }} km</td>
-        </tr>
-      </tbody>
-    </table>
-</div>
+<!-- </div> -->
   </div>
 </main>
 

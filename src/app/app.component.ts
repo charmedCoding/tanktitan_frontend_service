@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -21,7 +21,7 @@ import { Geolocation } from '@capacitor/geolocation';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  
+  @ViewChild('submitButton', { static: true }) submitButton!: ElementRef<HTMLButtonElement>;
   title = 'tanktitan';
   public stations: any[] = []; 
   public maps: any[] = [];
@@ -123,5 +123,8 @@ export class AppComponent implements OnInit {
 
   panToStation(station: any) {
     this.mapService.setMapCenterAndZoom(station.lat, station.lng, 15);
+  }
+  onEnter(): void {
+    this.submitButton.nativeElement.click();
   }
 }
