@@ -203,18 +203,38 @@
     <div class="userInput">
       <section class="search">
         <!-- <input type="text" placeholder="search address" (keydown.enter)="onEnter()" #addressInput class="searchInput"> -->
-        <input type="text" placeholder="search address" (keydown.enter)="geocode(addressInput.value, fuel-type)" #addressInput class="searchInput">
-      <!-- <button (click)="geocode(addressInput.value)" #submitButton>🔍</button> -->
+        <input type="text" placeholder="search address" (keydown.enter)="geocode(addressInput.value)" #addressInput class="searchInput">
+        <button (click)="geocode(addressInput.value)" #submitButton class="searchButton">
+          <img src="assets/search.png" alt="Button Image" class="searchImg"/>
+        </button>
+        <button (click)="locateMe()" class="locationButton">
+          <img src="assets/location.png" alt="Button Image" class="locationImg"/>
+        </button>
+      
     </section>
     <div name="buttonOptions">
-      <button (click)="locateMe()" class="location">Your location</button>
+    
       <!-- <div id="map" style="height: 500px; width: 100%;"></div> -->
-        <select id="fueType" class="fuel" onchange="getOption()" >
+        <select id="fueType" class="selectMenu" (change)="onSelectFuel()" #fuelType >
           <!-- <option value="" disabled selected>Fuel</option>  -->
-          <option value="gasoline">all</option>
+          <!-- <option value="all">all</option> -->
           <option value="diesel">diesel</option>
           <option value="e5">e5</option>
           <option value="e10">e10</option>
+        </select>
+        <select id="radius" class="selectMenu" (change)="onSelectRadius()" #radius >
+          <!-- <option value="" disabled selected>Fuel</option>  -->
+          <option value="1">1 km</option>
+          <option value="5">5 km</option>
+          <option value="10">10 km</option>
+          <option value="15">15 km</option>
+          <option value="20">20 km</option>
+        </select>
+        <select id="sort" class="selectMenu" (change)="onSelectSort()" #sort >
+          <!-- <option value="" disabled selected>Fuel</option>  -->
+          <option value="price">price</option>
+          <option value="dist">distance</option>
+      
         </select>
         <!-- <select name="radius" id="radius">
             <option value="radius">Radius</option>
@@ -222,38 +242,32 @@
       </div>
         
       </div>
-<div class = "scrollTankstelle">
-  <h4>Petrol stations</h4>
+<div class = "table-container">
   <table>
     <thead>
       <tr>
         <th>Price</th>
         <th>Address</th>
-        <!-- <th>Address</th> -->
-        
         <th>Distance</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let station of stations">
-        <td>{{ station.price }}€</td>
-        <td (click)="panToStation(station)" class="petrol_station">
+      <tr *ngFor="let station of stations" class="stationTable">
+        <td class="col_1">{{ station.price }}€</td>
+        <td (click)="panToStation(station)" class="col_2">
           {{ station.brand }}<br>
           <div class="address">
           {{ station.street }}<br>
           {{ station.place }}, {{ station.postCode }}
         </div>
-        </td>
-        <td (click)="panToStation(station)"class="pointer-cursor">
-        
-        <!-- <td>{{ station.isOpen ? 'Yes' : 'No' }}</td> -->
-        <td>{{ station.dist }} km</td>
+        </td >
+        <td class="col_3">{{ station.dist }} km</td>
       </tr>
     </tbody>
   </table>
 </div>
 </div>
-  <div id="map" style="width: 100%; height: 400px; margin: 1vh"></div>
+  <div id="map" style="width: 100%; height: 750px; margin: 1vh"></div>
   <!-- <div class="TankApi"> -->
   <!-- <section class="stations">
   

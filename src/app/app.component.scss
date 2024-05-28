@@ -1,11 +1,69 @@
-* {
-    // margin: 0;
-    // padding: 0;
-    // box-sizing: border-box;
-    // background-color: #012531;
-    // background-color: #FFF3E0;
-    // color: white;
+.table-container {
+  width: 100%;
+  max-height: 600px; /* Set a maximum height for vertical scrolling */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: auto; /* Enable vertical scrolling */
+
+  // border: 1px solid #ccc; /* Optional: add a border around the container */
+  
+}
+  table{
+    width: 100%;
+    // margin: 1vh;
   }
+  th, td {
+    // border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+    word-wrap: break-word; /* Ensures content wraps to new lines if necessary */
+   
+  }
+  th {
+    background-color:#FFF3DD;
+    color: #012531;
+    font-style: bold;
+    position: sticky;
+    top: 0; /* Position header at the top */
+    z-index: 2; /* Ensure the header stays above other content */
+    
+  }
+
+  .col_1 {
+    width: 20%;
+  }
+
+  .col_2 {
+    width: 60%;
+    cursor: pointer;
+   
+    
+  }
+  tr:hover{
+    background-color: pink;
+    color: #012531;
+  }
+
+  .col_3 {
+    width: 20%;
+  }
+  // .petrolStation{
+  //   padding: 1vh;
+  //   width: 100%;
+  // }
+  button{
+    cursor: pointer;
+    background-color: #FFF3DD; 
+    border-style: solid;
+    border-radius: 15px;
+    color: #012531;
+    padding: 2px;
+    margin: 1vh;
+    height: 100%;
+    width: 20%;
+  }
+  // .searchButton{
+  //   background-color: #953fc3; 
+  // }
  
   .title{
       color: #012531;
@@ -17,42 +75,56 @@
     // flex-direction: row;
     // justify-content: space-between;
   }
-  .location{
-    background-color: #FFF3DD; 
-    padding: 4px;
-    border-style: solid;
-    border-radius: 30px;
-    color: #012531;
-    padding: 1vh;
-    margin: 1vh;
-   
-  }
+  
   ::placeholder {
     color: #FFF3DD;
     opacity: 50%;
   
   }
+  .search{
+    display: flex;
+  }
  
   .searchInput{
     background: none;
     border-style: solid;
-    width: 85%;
+    width: 70%;
     border-radius: 10px;
     border-color:#FFF3DD;
     padding: 1vh;
     margin: 1vh;
     // caret-color: red;
     color: #FFF3DD;
-
-
   }
+  .locationImg{
+    width: 95%;
+    height: 95%;
+    
+  }
+  .searchImg{
+    width: 95%;
+    height: 95%;
+  }
+  // .location{
+  //   background-color: #FFF3DD; 
+  //   border-style: solid;
+  //   border-radius: 15px;
+  //   color: #012531;
+  //   padding: 2px;
+  //   margin: 1vh;
+  //   height: 100%;
+  //   width: 15%;
+  // }
+  
+
   .buttonOptions{
     background-color: pink;
     display:flex;
+    margin: 1vh;
   }
 
   
-  .fuel{
+  .selectMenu{
     background-color: #FFF3DD; 
     padding: 4px;
     border-style: solid;
@@ -62,14 +134,13 @@
     margin: 1vh;
     margin-left:auto;
   }
-  .petrol_station{
-    padding: 1vh;
-  }
+ 
   .address{
     color: #7493a3;
     font-style: italic;
     font-size: 1.5vh;
   }
+
   
   .header {
   

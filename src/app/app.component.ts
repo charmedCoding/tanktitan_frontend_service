@@ -21,8 +21,15 @@ import { Geolocation } from '@capacitor/geolocation';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  @ViewChild('submitButton', { static: true }) submitButton!: ElementRef<HTMLButtonElement>;
+  // @ViewChild('submitButton', { static: true }) submitButton!: ElementRef<HTMLButtonElement>;
+  @ViewChild('fuelType') fuelType!: ElementRef<HTMLSelectElement>;
+  @ViewChild('radius') radius!: ElementRef<HTMLSelectElement>;
+  @ViewChild('sort') sort!: ElementRef<HTMLSelectElement>;
   title = 'tanktitan';
+  fuel: string = 'diesel';
+  rad: string = '1';
+  sortBy:string = 'price';
+
   public stations: any[] = []; 
   public maps: any[] = [];
   service: any;
@@ -35,8 +42,10 @@ export class AppComponent implements OnInit {
   }
 
   loadAndDisplayStations(lat: number, lng: number): void {
-    
-    this.http.get<any>(`http://localhost:8081/api/stations?lat=${lat}&lng=${lng}&rad=200&sort=dist&type=diesel`).subscribe({
+    console.log(this.fuel)
+    console.log(this.sortBy)
+    console.log(this.rad)
+    this.http.get<any>(`http://localhost:8081/api/stations?lat=${lat}&lng=${lng}&rad=${this.rad}&sort=${this.sortBy}&type=${this.fuel}`).subscribe({
       next: (response) => {
         this.stations = response;
         this.addStationMarkers();
@@ -129,17 +138,27 @@ export class AppComponent implements OnInit {
   panToStation(station: any) {
     this.mapService.setMapCenterAndZoom(station.lat, station.lng, 15);
   }
-  onEnter(): void {
-    this.submitButton.nativeElement.click();
-  }
+  // onEnter(): void {
+  //   this.submitButton.nativeElement.click();
+  // }
+  
+ 
+  onSelectFuel(): void {
+  
+    this.fuel = this.fuelType.nativeElement.value;
 
-  getOption():void{
-    var selectElement = document.getElementById('fuelType');
-    // if(selectElement){
-    // var selectedValue = selectElement.value;
-    // }else{
-    //   selectedValue = 'all';
-    // }
-    console.log(selectElement); // The selected value (a string)
+    console.log(this.fuel); // The selected value (a string)
+  }
+  onSelectRadius(): void {
+  
+    this.rad = this.radius.nativeElement.value;
+
+    console.log(this.rad); // The selected value (a string)
+  }
+  onSelectSort(): void {
+  
+    this.sortBy = this.sort.nativeElement.value;
+
+    console.log(this.sortBy); // The selected value (a string)
   }
 }
