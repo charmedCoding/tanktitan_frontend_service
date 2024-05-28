@@ -203,16 +203,18 @@
     <div class="userInput">
       <section class="search">
         <!-- <input type="text" placeholder="search address" (keydown.enter)="onEnter()" #addressInput class="searchInput"> -->
-        <input type="text" placeholder="search address" (keydown.enter)="geocode(addressInput.value)" #addressInput class="searchInput">
+        <input type="text" placeholder="search address" (keydown.enter)="geocode(addressInput.value, fuel-type)" #addressInput class="searchInput">
       <!-- <button (click)="geocode(addressInput.value)" #submitButton>🔍</button> -->
     </section>
     <div name="buttonOptions">
       <button (click)="locateMe()" class="location">Your location</button>
       <!-- <div id="map" style="height: 500px; width: 100%;"></div> -->
-        <select name="fuel-type" id="fuel-type" class="fuel">
-          <option value="" disabled selected>Fuel</option> 
-          <option value="gasoline">Gasoline</option>
-          <option value="diesel">Diesel</option>
+        <select id="fueType" class="fuel" onchange="getOption()" >
+          <!-- <option value="" disabled selected>Fuel</option>  -->
+          <option value="gasoline">all</option>
+          <option value="diesel">diesel</option>
+          <option value="e5">e5</option>
+          <option value="e10">e10</option>
         </select>
         <!-- <select name="radius" id="radius">
             <option value="radius">Radius</option>
@@ -225,18 +227,26 @@
   <table>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Address</th>
         <th>Price</th>
+        <th>Address</th>
+        <!-- <th>Address</th> -->
+        
         <th>Distance</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let station of stations">
-        <td (click)="panToStation(station)"class="pointer-cursor">{{ station.name }} ({{ station.brand }})</td>
-        <td (click)="panToStation(station)"class="pointer-cursor">{{ station.street }}, {{ station.place }}, {{ station.postCode }}</td>
         <td>{{ station.price }}€</td>
-        <td>{{ station.isOpen ? 'Yes' : 'No' }}</td>
+        <td (click)="panToStation(station)" class="petrol_station">
+          {{ station.brand }}<br>
+          <div class="address">
+          {{ station.street }}<br>
+          {{ station.place }}, {{ station.postCode }}
+        </div>
+        </td>
+        <td (click)="panToStation(station)"class="pointer-cursor">
+        
+        <!-- <td>{{ station.isOpen ? 'Yes' : 'No' }}</td> -->
         <td>{{ station.dist }} km</td>
       </tr>
     </tbody>

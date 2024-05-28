@@ -35,6 +35,7 @@ export class AppComponent implements OnInit {
   }
 
   loadAndDisplayStations(lat: number, lng: number): void {
+    
     this.http.get<any>(`http://localhost:8081/api/stations?lat=${lat}&lng=${lng}&rad=200&sort=dist&type=diesel`).subscribe({
       next: (response) => {
         this.stations = response;
@@ -45,6 +46,8 @@ export class AppComponent implements OnInit {
       }
     });
   }
+  
+
 
   async initMap(): Promise<void> {
     try {
@@ -59,7 +62,7 @@ export class AppComponent implements OnInit {
   loadAndDisplayMaps(): void {
     this.mapService.getMap().then(map => {
      
-      console.log('Google Map geladen und angezeigt');
+      // console.log('Google Map geladen und angezeigt');
      
       
     }).catch(error => {
@@ -97,6 +100,7 @@ export class AppComponent implements OnInit {
   }
 
   async geocode(address: string) {
+    
     try {
       const location = await this.mapService.geocodeAddress(address);
       await this.mapService.initMap(location.lat, location.lng);
@@ -115,7 +119,8 @@ export class AppComponent implements OnInit {
       console.log(`Geolocation: ${lat}, ${lng}`);
       await this.mapService.initMap(lat, lng); 
       this.mapService.setMapCenterAndZoom(lat, lng, 15);
-      this.loadAndDisplayStations(lat, lng); 
+      // HARD CODED NEEDS TO BE CHANGED!
+      this.loadAndDisplayStations(lat, lng ); 
     } catch (error) {
       console.error('Error getting location', error);
     }
@@ -126,5 +131,15 @@ export class AppComponent implements OnInit {
   }
   onEnter(): void {
     this.submitButton.nativeElement.click();
+  }
+
+  getOption():void{
+    var selectElement = document.getElementById('fuelType');
+    // if(selectElement){
+    // var selectedValue = selectElement.value;
+    // }else{
+    //   selectedValue = 'all';
+    // }
+    console.log(selectElement); // The selected value (a string)
   }
 }
