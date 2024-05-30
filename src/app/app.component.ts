@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http'; 
 import { MapService } from './map.service';
 import { Geolocation } from '@capacitor/geolocation';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +14,9 @@ import { Geolocation } from '@capacitor/geolocation';
   imports: [
     CommonModule,
     HttpClientModule, 
-    RouterOutlet
+    RouterOutlet,
+    // BrowserAnimationsModule,
+    ButtonModule
   ],
   providers: [MapService],
   templateUrl: './app.component.html',
