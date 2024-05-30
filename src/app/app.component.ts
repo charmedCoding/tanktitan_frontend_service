@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -19,8 +19,15 @@ import { Geolocation } from '@capacitor/geolocation';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  
+  // @ViewChild('submitButton', { static: true }) submitButton!: ElementRef<HTMLButtonElement>;
+  @ViewChild('fuelType') fuelType!: ElementRef<HTMLSelectElement>;
+  @ViewChild('radius') radius!: ElementRef<HTMLSelectElement>;
+  @ViewChild('sort') sort!: ElementRef<HTMLSelectElement>;
   title = 'tanktitan';
+  fuel: string = 'diesel';
+  rad: string = '1';
+  sortBy:string = 'price';
+
   public stations: any[] = []; 
   public maps: any[] = [];
   service: any;
@@ -33,7 +40,10 @@ export class AppComponent implements OnInit {
   }
 
   loadAndDisplayStations(lat: number, lng: number): void {
-    this.http.get<any>(`http://localhost:8081/api/stations?lat=${lat}&lng=${lng}&rad=200&sort=dist&type=diesel`).subscribe({
+    console.log(this.fuel)
+    console.log(this.sortBy)
+    console.log(this.rad)
+    this.http.get<any>(`http://localhost:8081/api/stations?lat=${lat}&lng=${lng}&rad=${this.rad}&sort=${this.sortBy}&type=${this.fuel}`).subscribe({
       next: (response) => {
         console.log('Stations response:', response);
         this.stations = response;
@@ -44,6 +54,8 @@ export class AppComponent implements OnInit {
       }
     });
   }
+  
+
 
   async initMap(): Promise<void> {
     try {
@@ -56,7 +68,7 @@ export class AppComponent implements OnInit {
   
   loadAndDisplayMaps(): void {
     this.mapService.getMap().then(map => {
-      console.log('Google Map geladen und angezeigt');
+
     }).catch(error => {
       console.error('Fehler beim Laden der Google Map:', error);
     });
@@ -89,6 +101,7 @@ export class AppComponent implements OnInit {
   }
 
   async geocode(address: string) {
+    
     try {
       const location = await this.mapService.geocodeAddress(address);
       await this.mapService.initMap(location.lat, location.lng);
@@ -107,7 +120,8 @@ export class AppComponent implements OnInit {
       console.log(`Geolocation: ${lat}, ${lng}`);
       await this.mapService.initMap(lat, lng); 
       this.mapService.setMapCenterAndZoom(lat, lng, 15);
-      this.loadAndDisplayStations(lat, lng); 
+      // HARD CODED NEEDS TO BE CHANGED!
+      this.loadAndDisplayStations(lat, lng ); 
     } catch (error) {
       console.error('Error getting location', error);
     }
@@ -122,4 +136,30 @@ export class AppComponent implements OnInit {
       console.error('Koordinaten nicht gefunden für die Station:', station);
     }
   }
+  // onEnter(): void {
+  //   this.submitButton.nativeElement.click();
+  // }
+  
+ 
+  onSelectFuel(): void {
+  
+    this.fuel = this.fuelType.nativeElement.value;
+
+    console.log(this.fuel); // The selected value (a string)
+  }
+  onSelectRadius(): void {
+  
+    this.rad = this.radius.nativeElement.value;
+
+    console.log(this.rad); // The selected value (a string)
+  }
+  onSelectSort(): void {
+  
+    this.sortBy = this.sort.nativeElement.value;
+
+    console.log(this.sortBy); // The selected value (a string)
+  }
 }
+
+}
+

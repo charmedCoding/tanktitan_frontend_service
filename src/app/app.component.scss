@@ -1,28 +1,174 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    // background-color: #FFF3E0;
-  }
+.table-container {
+  width: 100%;
+  max-height: 600px; /* Set a maximum height for vertical scrolling */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: auto; /* Enable vertical scrolling */
+
+  // border: 1px solid #ccc; /* Optional: add a border around the container */
   
-  .header {
-    border-top: none; /* Entfernen Sie diese Linie, wenn der Header direkt am oberen Rand sein soll */
+}
+  table{
     width: 100%;
-    display: flex;
-    align-items: center;
-    background-color: #c3f6ff94; /* Hintergrundfarbe des Headers */
-    padding: 10px 20px; /* Sie hatten dies auskommentiert; stellen Sie sicher, dass es keine unbeabsichtigten Ränder gibt */
+    // margin: 1vh;
+  }
+  th, td {
+    // border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+    word-wrap: break-word; /* Ensures content wraps to new lines if necessary */
+   
+  }
+  th {
+    background-color:#FFF3DD;
+    color: #012531;
+    font-style: bold;
+    position: sticky;
+    top: 0; /* Position header at the top */
+    z-index: 2; /* Ensure the header stays above other content */
+    
   }
 
-  .TankApi {
-    /* position: fixed; Entfernen, damit es mit dem Inhalt scrollt */
+  .col_1 {
+    width: 20%;
+  }
+
+  .col_2 {
+    width: 60%;
+    cursor: pointer;
+   
+    
+  }
+  tr:hover{
+    background-color: pink;
+    color: #012531;
+  }
+
+  .col_3 {
+    width: 20%;
+  }
+  // .petrolStation{
+  //   padding: 1vh;
+  //   width: 100%;
+  // }
+  button{
+    cursor: pointer;
+    background-color: #FFF3DD; 
+    border-style: solid;
+    border-radius: 15px;
+    color: #012531;
+    padding: 2px;
+    margin: 1vh;
+    height: 100%;
+    width: 20%;
+  }
+  // .searchButton{
+  //   background-color: #953fc3; 
+  // }
+ 
+  .title{
+      color: #012531;
+  }
+  .container{
+    display: flex;
+    justify-content: center; /* Aligns items horizontally */
+    // align-items: center;   /* Aligns items vertically */
+    height: 100vh;  
     width: 100%;
-    /* padding-top entfernen, wenn es nicht länger fest positioniert ist */
-    box-sizing: border-box;
-    /* Weitere Stilangaben hinzufügen */
+  }
+  .items{
+    display: flex;
+    padding: 1vh;
+    color: #FFF3DD;
+    width: 70%;
+  }
+  
+  ::placeholder {
+    color: #FFF3DD;
+    opacity: 50%;
+  
+  }
+  .search{
+    display: flex;
+  }
+ 
+  .searchInput{
+    background: none;
+    border-style: solid;
+    width: 70%;
+    border-radius: 10px;
+    border-color:#FFF3DD;
+    padding: 1vh;
+    margin: 1vh;
+    // caret-color: red;
+    color: #FFF3DD;
+  }
+  .locationImg{
+    width: 95%;
+    height: 95%;
+    
+  }
+  .searchImg{
+    width: 95%;
+    height: 95%;
+  }
+  // .location{
+  //   background-color: #FFF3DD; 
+  //   border-style: solid;
+  //   border-radius: 15px;
+  //   color: #012531;
+  //   padding: 2px;
+  //   margin: 1vh;
+  //   height: 100%;
+  //   width: 15%;
+  // }
+  
+
+  .buttonOptions{
+    background-color: pink;
+    display:flex;
+    margin: 1vh;
+  }
+
+  
+  .selectMenu{
+    background-color: #FFF3DD; 
+    padding: 4px;
+    border-style: solid;
+    border-radius: 30px;
+    color: #012531;
+    padding: 1vh;
+    margin: 1vh;
+    margin-left:auto;
+  }
+ 
+  .address{
+    color: #7493a3;
+    font-style: italic;
+    font-size: 1.5vh;
+  }
+
+  
+  .header {
+  
+    // border-top: none; /* Entfernen Sie diese Linie, wenn der Header direkt am oberen Rand sein soll */
+    width: 100%;
+    display: flex;
+    // flex-direction: row;
+   
+    align-items: center;
+    background-color: #FFF3DD; /* Hintergrundfarbe des Headers */
+    
+    // padding: 10px 20px; /* Sie hatten dies auskommentiert; stellen Sie sicher, dass es keine unbeabsichtigten Ränder gibt */
+  }
+  .h1{
+    font-family: 'Arial', sans-serif;
+    margin: 10px 20px;
+    color: #012531;
   }
   
   
+
+ 
   .logo {
     flex: 1; /* Logo nimmt den verfügbaren Platz auf der linken Seite ein */
   }
@@ -30,53 +176,27 @@
   .logo img {
     width: 100px; /* Stellen Sie die gewünschte Größe Ihres Logos ein */
   }
-  
-  .search {
-    max-width: 500px;
-    display: flex;
-    justify-content: space-between; 
-    gap: 20px; 
-    padding: 10px; 
-    align-items: center;
-  }
-  
-  .stations {
-    margin-top: 20px; /* Abstand zwischen Header und Tankstellenliste */
-    padding: 10px;
-  }
-
-  table {
+  .search{
     width: 100%;
-    border-collapse: collapse;
   }
-  
-  table, th, td {
-    border: 1px solid black;
-  }
-  
-  th, td {
-    padding: 8px;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #f0f0f0;
-  }
-  
-  .pointer-cursor {
-  cursor: pointer;
-}
 
-  .header-buttons button {
-    margin-left: 10px; /* Space between buttons */
-    padding: 5px 10px;
-    cursor: pointer; /* Pointer cursor on hover */
-    
-    
-    .scrollTankstelle {
-  overflow-y: auto;
-}
+  .left{
+    width: 50%;
+    margin: 1vh;
+  }
+
+  
+  
+ 
+  
+ 
+  
+  
+  
+  
+
+  
 
 
-}
+
 
