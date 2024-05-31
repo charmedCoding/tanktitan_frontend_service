@@ -11,19 +11,19 @@
    
 </header>
 <div class="container">
-  <p-button label="PrimeNG" />
+
 <div class="items">
   <div class="left">
     <div class="userInput">
       <section class="search">
         <!-- <input type="text" placeholder="search address" (keydown.enter)="onEnter()" #addressInput class="searchInput"> -->
         <input type="text" placeholder="search address" (keydown.enter)="geocode(addressInput.value)" #addressInput class="searchInput">
-        <button (click)="geocode(addressInput.value)" #submitButton class="searchButton">
+        <p-button (click)="geocode(addressInput.value)" #submitButton class="searchButton">
           <img src="assets/search.png" alt="Button Image" class="searchImg"/>
-        </button>
-        <button (click)="locateMe()" class="locationButton">
+        </p-button>
+        <p-button (click)="locateMe()" class="locationButton">
           <img src="assets/location.png" alt="Button Image" class="locationImg"/>
-        </button>
+        </p-button>
       
     </section>
     <div name="buttonOptions">
@@ -43,11 +43,10 @@
           <!-- <option value="" disabled selected>Fuel</option>  -->
           <option value="price">price</option>
           <option value="dist">distance</option>
-      
-        </select>
+        <select>
       </div>
         
-      </div>
+      
 <div class = "table-container">
   <table>
     <thead>

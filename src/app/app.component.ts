@@ -7,6 +7,7 @@ import { MapService } from './map.service';
 import { Geolocation } from '@capacitor/geolocation';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { ButtonModule } from 'primeng/button';
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ import { ButtonModule } from 'primeng/button';
     HttpClientModule, 
     RouterOutlet,
     // BrowserAnimationsModule,
-    ButtonModule
+    ButtonModule,
+    DropdownModule
   ],
   providers: [MapService],
   templateUrl: './app.component.html',
