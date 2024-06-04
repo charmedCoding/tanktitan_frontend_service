@@ -68,12 +68,18 @@
   .title{
       color: #012531;
   }
-  .elements{
+  .container{
+    display: flex;
+    justify-content: center; /* Aligns items horizontally */
+    // align-items: center;   /* Aligns items vertically */
+    height: 100vh;  
+    width: 100%;
+  }
+  .items{
     display: flex;
     padding: 1vh;
     color: #FFF3DD;
-    // flex-direction: row;
-    // justify-content: space-between;
+    width: 70%;
   }
   
   ::placeholder {

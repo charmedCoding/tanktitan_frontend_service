@@ -95,8 +95,11 @@ export class MapService {
 
   setMapCenterAndZoom(lat: number, lng: number, zoom: number): void {
     if (this.map) {
+      console.log(`Centering map to ${lat}, ${lng} with zoom ${zoom}`);
       this.map.setCenter({ lat: lat, lng: lng });
       this.map.setZoom(zoom);
+    } else {
+      console.error('Map instance is not initialized.');
     }
   }
 
