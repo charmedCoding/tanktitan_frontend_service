@@ -1,5 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
-html { background: linear-gradient(to bottom,#0a0102, #1b0d33 , #db6b7a ); }
+// html { background: linear-gradient(to bottom,#0a0102, #1b0d33 , #db6b7a ); }
+html{
+    background: linear-gradient(to bottom,#98242D , #C82834 );
+    // background-color: #C82834;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    
+}
 
 // tbody{
 //     width: 100%;

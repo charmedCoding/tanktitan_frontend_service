@@ -127,7 +127,7 @@ export class MapService {
               map: this.map,
               title: place.name,
               icon: {
-                url: 'assets/icons8-gas-station-50 (1).png', // Pfad zu Ihrem benutzerdefinierten Icon
+                url: 'assets/tank_titan_pin_01.png', // Pfad zu Ihrem benutzerdefinierten Icon
                 scaledSize: new google.maps.Size(32, 32) // Größe des Icons anpassen
               }
             });
@@ -165,8 +165,8 @@ export class MapService {
           map: this.map,
           title: station.name,
           icon: {
-            url: 'assets/icons8-gas-station-50 (1).png', 
-            scaledSize: new google.maps.Size(32, 32) 
+            url: 'assets/tank_titan_pin_03.png', 
+            scaledSize: new google.maps.Size(80, 80) 
           }
         });
         this.markers.push(marker); // Füge den neuen Marker zur Liste hinzu

@@ -9,7 +9,8 @@
 }
   table{
     width: 100%;
-    // margin: 1vh;
+    margin: 1vh;
+    
   }
   th, td {
     // border: 1px solid black;
@@ -18,9 +19,10 @@
     word-wrap: break-word; /* Ensures content wraps to new lines if necessary */
    
   }
+ 
   th {
-    background-color:#FFF3DD;
-    color: #012531;
+    background-color:#C82834;
+    color: white;
     font-style: bold;
     position: sticky;
     top: 0; /* Position header at the top */
@@ -46,13 +48,16 @@
   .col_3 {
     width: 20%;
   }
+  .footer{
+    height: 2vh;
+  }
   // .petrolStation{
   //   padding: 1vh;
   //   width: 100%;
   // }
   button{
     cursor: pointer;
-    background-color: #FFF3DD; 
+    background-color: #C82834; 
     border-style: solid;
     border-radius: 15px;
     color: #012531;
@@ -66,9 +71,12 @@
   // }
  
   .title{
-      color: #012531;
+      color: black;
+      
   }
   .container{
+   
+    
     display: flex;
     justify-content: center; /* Aligns items horizontally */
     // align-items: center;   /* Aligns items vertically */
@@ -76,14 +84,28 @@
     width: 100%;
   }
   .items{
+    // /* Add shadows to create the "card" effect */
+    // box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    // transition: 0.3s;
+    // // border-style: solid;
+    // border-radius: 15px;
+    // background-color: #292929;
+      
     display: flex;
-    padding: 1vh;
-    color: #FFF3DD;
+    padding: 2vh;
+    color: #C82834;
     width: 70%;
+  }
+  .map{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    // border-style: solid;
+    border-radius: 15px;
+    background-color: #292929;
   }
   
   ::placeholder {
-    color: #FFF3DD;
+    color: #C82834;
     opacity: 50%;
   
   }
@@ -96,11 +118,11 @@
     border-style: solid;
     width: 70%;
     border-radius: 10px;
-    border-color:#FFF3DD;
+    border-color:#C82834;
     padding: 1vh;
     margin: 1vh;
     // caret-color: red;
-    color: #FFF3DD;
+    color: #C82834;
   }
   .locationImg{
     width: 95%;
@@ -131,7 +153,7 @@
 
   
   .selectMenu{
-    background-color: #FFF3DD; 
+    background-color:#C82834; 
     padding: 4px;
     border-style: solid;
     border-radius: 30px;
@@ -154,24 +176,27 @@
     width: 100%;
     display: flex;
     // flex-direction: row;
+    justify-content: center;
    
     align-items: center;
-    background-color: #FFF3DD; /* Hintergrundfarbe des Headers */
+    // background-color: #FFF3DD; /* Hintergrundfarbe des Headers */
+    // background-color: #803B15;
+    margin: 0;
     
     // padding: 10px 20px; /* Sie hatten dies auskommentiert; stellen Sie sicher, dass es keine unbeabsichtigten Ränder gibt */
   }
-  .h1{
-    font-family: 'Arial', sans-serif;
-    margin: 10px 20px;
-    color: #012531;
-  }
+  // .h1{
+  //   font-family: 'Arial', sans-serif;
+  //   margin: 10px 20px;
+  //   color:black;
+  // }
   
   
 
  
-  .logo {
-    flex: 1; /* Logo nimmt den verfügbaren Platz auf der linken Seite ein */
-  }
+  // .logo {
+  //   flex: 1; /* Logo nimmt den verfügbaren Platz auf der linken Seite ein */
+  // }
   
   .logo img {
     width: 100px; /* Stellen Sie die gewünschte Größe Ihres Logos ein */
@@ -183,6 +208,14 @@
   .left{
     width: 50%;
     margin: 1vh;
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    // border-style: solid;
+    border-radius: 15px;
+    background-color: #292929;
+    padding: 1.5vh;
+    height: 700px;
   }
 
   
