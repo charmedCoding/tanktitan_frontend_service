@@ -34,12 +34,14 @@ export class AppComponent implements OnInit {
 
   constructor(private http: HttpClient, private mapService: MapService) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.loadAndDisplayMaps();
-    this.loadAndDisplayStations(48.7758, 9.1829); // Stuttgart coordinates
+    this.loadAndDisplayStations(48.7758, 9.1829);
+     // Stuttgart coordinates
   }
 
   loadAndDisplayStations(lat: number, lng: number): void {
+   
     console.log(this.fuel)
     console.log(this.sortBy)
     console.log(this.rad)
@@ -136,11 +138,7 @@ export class AppComponent implements OnInit {
       console.error('Koordinaten nicht gefunden für die Station:', station);
     }
   }
-  // onEnter(): void {
-  //   this.submitButton.nativeElement.click();
-  // }
-  
- 
+
   onSelectFuel(): void {
   
     this.fuel = this.fuelType.nativeElement.value;

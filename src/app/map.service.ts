@@ -165,8 +165,8 @@ export class MapService {
           map: this.map,
           title: station.name,
           icon: {
-            url: 'assets/icons8-gas-station-50 (1).png', 
-            scaledSize: new google.maps.Size(32, 32) 
+            url: 'assets/tank_titan_pin_03.png', 
+            scaledSize: new google.maps.Size(50, 50) 
           }
         });
         this.markers.push(marker); // Füge den neuen Marker zur Liste hinzu
