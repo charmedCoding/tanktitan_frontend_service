@@ -3,6 +3,8 @@
   max-height: 50%; /* Set a maximum height for vertical scrolling */
   overflow-x: auto; /* Enable horizontal scrolling */
   overflow-y: auto; /* Enable vertical scrolling */
+  padding: 0;
+  margin: 0;
  
 }
   table{
@@ -13,7 +15,7 @@
   }
   th, td {
     // border: 1px solid black;
-    padding: 8px;
+    padding: 1vh;
     text-align: left;
     word-wrap: break-word; /* Ensures content wraps to new lines if necessary */
    
@@ -47,19 +49,7 @@
     width: 20%;
   }
   
-  button{
-    cursor: pointer;
-    background-color: var(--primary-color); 
-    // border-style: solid;
-    border: none;
-    border-radius: 15px;
-    color: var(--primary-font-color);
-    padding: 1vh;
-    margin: 1vh;
-    // height: 10vh;
-    width: 10vh;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-  }
+ 
  
   .title{
       color: var(--primary-font-color);
@@ -71,10 +61,51 @@
     flex-direction: column;
     height: 100vh;  
     width: 100%;
-    padding: 0;
+    padding: 1vh;
     margin: 0;
   }
- 
+  .searchInput{
+    background: none;
+    border-style: solid;
+    width: 80%;
+    height: 60%;
+    border-radius: 30px 0px 0px 30px;
+    border-color:var(--primary-color);
+    padding: 1vh;
+    // margin: 1vh;
+    // caret-color: red;
+    color: var(--primary-color);
+  }
+  .searchButton{
+    cursor: pointer;
+    background-color: var(--primary-color); 
+    // border-style: solid;
+    border: none;
+    border-radius: 0px 30px 30px 0px;
+    color: var(--primary-font-color);
+    // padding: 1vh;
+   
+    // height: 10vh;
+    width: 20%;
+    height: 60%;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  }
+  button{
+    cursor: pointer;
+    background-color: var(--primary-color); 
+    padding: 4px;
+    border-style: solid;
+    border-radius: 100%;
+    color: white;
+    padding: 1vh;
+    margin: 1vh;
+    margin-left:auto;
+    border: none;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    width: 5vh;
+    height: 5vh;
+    // opacity: 50%;
+  }
   
   ::placeholder {
     color: var(--primary-color);
@@ -90,33 +121,25 @@
     padding: 1vh;
   }
  
-  .searchInput{
-    background: none;
-    border-style: solid;
-    width: 80%;
-    // height: 8vh;
-    border-radius: 10px;
-    border-color:var(--primary-color);
-    padding: 1vh;
-    margin: 1vh;
-    // caret-color: red;
-    color: var(--primary-color);
-  }
+
   .locationImg{
     width: 95%;
     height: 95%;
     
   }
   .searchImg{
-    width: 95%;
-    height: 95%;
+    width: 40%;
+    height: 80%;
+    padding: 0;
   }
 
   
 
   .buttonOptions{
-    background-color: pink;
+    // background-color: var(--primary-color);
     display:flex;
+    justify-content: center;
+    align-items: center;
     margin: 1vh;
   }
 
@@ -156,8 +179,10 @@
      // background-color: #FFF3DD; /* Hintergrundfarbe des Headers */
      // background-color: #803B15;
      margin: 0;
-     padding: 2vh;
+     padding: 30px;
   }
+
+
 //   .brandLogo{
 // width: 100%;
 // height: 100%;

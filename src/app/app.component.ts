@@ -5,6 +5,9 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http'; 
 import { MapService } from './map.service';
 import { Geolocation } from '@capacitor/geolocation';
+import {Message} from 'primeng/api';
+import { MessagesModule } from 'primeng/messages';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +15,9 @@ import { Geolocation } from '@capacitor/geolocation';
   imports: [
     CommonModule,
     HttpClientModule, 
-    RouterOutlet
+    RouterOutlet,
+    MessagesModule,
+    TooltipModule
   ],
   providers: [MapService],
   templateUrl: './app.component.html',
@@ -25,8 +30,10 @@ export class AppComponent implements OnInit {
   @ViewChild('sort') sort!: ElementRef<HTMLSelectElement>;
   title = 'tanktitan';
   fuel: string = 'diesel';
-  rad: string = '1';
+  rad: string = '5';
   sortBy:string = 'price';
+  messages1: Message[] = [];
+  input: any = 'Stuttgart';
 
   public stations: any[] = []; 
   public maps: any[] = [];
@@ -48,6 +55,9 @@ export class AppComponent implements OnInit {
     this.http.get<any>(`http://localhost:8081/api/stations?lat=${lat}&lng=${lng}&rad=${this.rad}&sort=${this.sortBy}&type=${this.fuel}`).subscribe({
       next: (response) => {
         console.log('Stations response:', response);
+        if (response.length === 0){
+          this.messages1 = [{severity: 'warn', summary: 'No gas stations in this area.', detail: "Please make sure you selected a city inside Germany. If there are still no stations try expanding the radius."}]
+        }
         this.stations = response;
         this.addStationMarkers();
       },
@@ -139,23 +149,26 @@ export class AppComponent implements OnInit {
     }
   }
 
+  setInput(input: any): void {
+    this.input = input;
+    
+  }
   onSelectFuel(): void {
   
     this.fuel = this.fuelType.nativeElement.value;
-
-    console.log(this.fuel); // The selected value (a string)
+    this.geocode(this.input)
+    
   }
   onSelectRadius(): void {
   
     this.rad = this.radius.nativeElement.value;
-
-    console.log(this.rad); // The selected value (a string)
+    this.geocode(this.input)
   }
   onSelectSort(): void {
   
     this.sortBy = this.sort.nativeElement.value;
-
-    console.log(this.sortBy); // The selected value (a string)
+    this.geocode(this.input)
+    
   }
 }
 
