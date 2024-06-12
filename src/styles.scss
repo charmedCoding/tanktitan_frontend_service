@@ -8,6 +8,7 @@ html, body {
     background-position: top;
     background-repeat: no-repeat;
     background-color:  #172027; 
+    // background: linear-gradient(to bottom, #172027, #1a232a, #1e272d, #212a31, #252e34);
     margin: 0;
     padding: 0; 
     max-width: 100%;
@@ -23,6 +24,7 @@ html, body {
 //     overflow-x: hidden;
 // }
 :root{
+    --background-color: #172027; 
     --primary-color: #FB7A3F;
     // --secondary-color: #975D3D;
     --secondary-color: #2d475a;

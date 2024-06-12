@@ -56,8 +56,6 @@
   }
   .container{
     display: flex;
-    // justify-content: center; /* Aligns items horizontally */
-    // align-items: center;   /* Aligns items vertically */
     flex-direction: column;
     height: 100vh;  
     width: 100%;
@@ -67,8 +65,8 @@
   .searchInput{
     background: none;
     border-style: solid;
-    width: 80%;
-    height: 60%;
+    width: 85%;
+    height: 70%;
     border-radius: 30px 0px 0px 30px;
     border-color:var(--primary-color);
     padding: 1vh;
@@ -79,15 +77,16 @@
   .searchButton{
     cursor: pointer;
     background-color: var(--primary-color); 
-    // border-style: solid;
-    border: none;
+    border-style: solid;
+    border-color: var(--primary-color);
+    // border: none;
     border-radius: 0px 30px 30px 0px;
     color: var(--primary-font-color);
     // padding: 1vh;
    
     // height: 10vh;
-    width: 20%;
-    height: 60%;
+    width: 15%;
+    height: 70%;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   }
   button{
@@ -104,6 +103,7 @@
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     width: 5vh;
     height: 5vh;
+    font-size: vh;
     // opacity: 50%;
   }
   
@@ -124,12 +124,14 @@
 
   .locationImg{
     width: 95%;
-    height: 95%;
+    height: 85%;
     
   }
   .searchImg{
-    width: 40%;
-    height: 80%;
+    width: 100%;
+    height: 110%;
+    // aspect-ratio: 1 / 1;
+    // align-self: ;
     padding: 0;
   }
 
@@ -138,10 +140,17 @@
   .buttonOptions{
     // background-color: var(--primary-color);
     display:flex;
+    // justify-content: center;
+    // align-items: center;
+    flex-direction: row;
     justify-content: center;
-    align-items: center;
     margin: 1vh;
+    width: 100%;
   }
+ .messageBG{
+  background-color: var(--background-color);
+  padding: 0;
+ }
 
   
   .selectMenu{
@@ -152,9 +161,10 @@
     color: white;
     padding: 1vh;
     margin: 1vh;
-    margin-left:auto;
+    // margin-left:auto;
     border: none;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    align-self: center;
   
   }
  .main{
@@ -173,7 +183,6 @@
      width: 100%;
      height: 3vh;
      display: flex;
-     // flex-direction: row;
      justify-content: center;
      align-items: center;
      // background-color: #FFF3DD; /* Hintergrundfarbe des Headers */
