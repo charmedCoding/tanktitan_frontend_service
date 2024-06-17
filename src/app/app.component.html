@@ -1,8 +1,10 @@
 <main>
+  <div class="background-overlay">
+  <!-- <img src="assets/tankTitan_01.png" alt="Firmenlogo" class ="brandLogo">  -->
   <!-- Header für Logo und Suchfeld -->
   <header class="header">
     <div class="logo">
-        <img src="assets/petrol_pump.jpg" alt="Firmenlogo">
+        <!-- <img src="assets/tankTitan_01.png" alt="Firmenlogo"> -->
        
     </div>
     <div class="title">
@@ -10,73 +12,96 @@
   </div>
    
 </header>
-<div class="container">
-<div class="items">
-  <div class="left">
-    <div class="userInput">
-      <section class="search">
-        <!-- <input type="text" placeholder="search address" (keydown.enter)="onEnter()" #addressInput class="searchInput"> -->
-        <input type="text" placeholder="search address" (keydown.enter)="geocode(addressInput.value)" #addressInput class="searchInput">
-        <button (click)="geocode(addressInput.value)" #submitButton class="searchButton">
-          <img src="assets/search.png" alt="Button Image" class="searchImg"/>
-        </button>
-        <button (click)="locateMe()" class="locationButton">
-          <img src="assets/location.png" alt="Button Image" class="locationImg"/>
-        </button>
-      
-    </section>
-    <div name="buttonOptions">
-        <select id="fueType" class="selectMenu" (change)="onSelectFuel()" #fuelType >
-          <option value="diesel">diesel</option>
-          <option value="e5">e5</option>
-          <option value="e10">e10</option>
-        </select>
-        <select id="radius" class="selectMenu" (change)="onSelectRadius()" #radius >
-          <option value="1">1 km</option>
-          <option value="5">5 km</option>
-          <option value="10">10 km</option>
-          <option value="15">15 km</option>
-          <option value="20">20 km</option>
-        </select>
-        <select id="sort" class="selectMenu" (change)="onSelectSort()" #sort >
-          <!-- <option value="" disabled selected>Fuel</option>  -->
-          <option value="price">price</option>
-          <option value="dist">distance</option>
-      
-        </select>
-      </div>
-        
-      </div>
-<div class = "table-container">
-  <table>
-    <thead>
-      <tr>
-        <th>Price</th>
-        <th>Address</th>
-        <th>Distance</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let station of stations" class="stationTable">
-        <td class="col_1">{{ station.price }}€</td>
-        <td (click)="panToStation(station)" class="col_2">
-          {{ station.brand }}<br>
-          <div class="address">
-          {{ station.street }}<br>
-          {{ station.place }}, {{ station.postCode }}
-        </div>
-        </td >
-        <td class="col_3">{{ station.dist }} km</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
 
-</div>
-  <div id="map" style="width: 100%; height: 600px; margin: 1vh"></div>
+<div class="container">
+<!-- <div class="items"> -->
+  <div class="userInput">
+  <section class="search">
+   
+    <!-- <input type="text" placeholder="search address" (keydown.enter)="onEnter()" #addressInput class="searchInput"> -->
+    <input type="text" placeholder="Stuttgart" (keydown.enter)="geocode(addressInput.value)" #addressInput class="searchInput" pTooltip="enter address" 
+    tooltipPosition="top">
+    <button (click)="geocode(addressInput.value)" #submitButton class="searchButton">
+      <img src="assets/search_white.png" alt="Button Image" class="searchImg"/>
+      
+    </button>
+    <button (click)="locateMe()" class="locationButton" pTooltip="use your current location" 
+    tooltipPosition="top">
+      <img src="assets/location_white.png" alt="Button Image" class="locationImg"/>
+    </button>
+  
+    
+</section>
+<div name="buttonOptions">
+ 
+    <select id="fueType" class="selectMenu" (change)="onSelectFuel()" #fuelType pTooltip="fuel type" 
+    tooltipPosition="top">
+      <option value="diesel">diesel</option>
+      <option value="e5">e5</option>
+      <option value="e10">e10</option>
+    </select>
+  
+    <select id="radius" class="selectMenu" (change)="onSelectRadius()" #radius [value]="5" pTooltip="radius" 
+    tooltipPosition="top">
+      <option value="1">1 km</option>
+      <option value="5">5 km</option>
+      <option value="10">10 km</option>
+      <option value="15">15 km</option>
+      <option value="20">20 km</option>
+    </select>
+
+    <select id="sort" class="selectMenu" (change)="onSelectSort()" #sort pTooltip="filter by cheapest prices or shortest distance" 
+    tooltipPosition="top" >
+      <!-- <option value="" disabled selected>Fuel</option>  -->
+      <option value="price">price</option>
+      <option value="dist">distance</option>
+  
+    </select>
 
   </div>
+    
+  </div>
+  <div id="map" style="width: 100%; height: 30%; padding: 8px;border-radius: 1vh; margin-bottom: 1.5vh; margin-top:1.5vh;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);"></div>
+  <!-- <div class = "messageBG"> -->
+  <p-messages [(value)]="messages1" [enableService]="false"/>
+<!-- </div> -->
+  <div class = "table-container" *ngIf="stations.length !=0">
+    
+
+  
+    <table>
+      <thead>
+        <tr>
+          <th>Price</th>
+          <th>Address</th>
+          <th>Distance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let station of stations" class="stationTable">
+          <td class="col_1">{{ station.price }}€</td>
+          <td (click)="panToStation(station)" class="col_2">
+            {{ station.brand }}<br>
+            <div class="address">
+            {{ station.street }}<br>
+            {{ station.place }}, {{ station.postCode }}
+          </div>
+          </td >
+          <td class="col_3">{{ station.dist }} km</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+ 
+    
+
+
+
 </div>
+
+  <!-- </div> -->
+<!-- </div> -->
 </main>
 
 

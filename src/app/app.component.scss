@@ -1,35 +1,53 @@
+.background-overlay{
+  background-image: url('/assets/tankTitan_01.png');
+  background-size: 70%;
+  background-position: top;
+  background-repeat: no-repeat;
+  padding: 1vh;
+  padding-top: 0;
+}
 .table-container {
   width: 100%;
-  max-height: 600px; /* Set a maximum height for vertical scrolling */
+  max-height: 50%; /* Set a maximum height for vertical scrolling */
   overflow-x: auto; /* Enable horizontal scrolling */
   overflow-y: auto; /* Enable vertical scrolling */
-
-  // border: 1px solid #ccc; /* Optional: add a border around the container */
-  
+  padding: 1vh;
+  padding-top: 0;
+  margin: 0;
+  border-radius: 1vh;
+  background-color: var(--background-color);
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+ 
 }
   table{
     width: 100%;
+    color: var(--primary-font-color)
+    
     // margin: 1vh;
   }
   th, td {
     // border: 1px solid black;
-    padding: 8px;
+    padding: 1vh;
     text-align: left;
     word-wrap: break-word; /* Ensures content wraps to new lines if necessary */
    
   }
   th {
-    background-color:#FFF3DD;
-    color: #012531;
+    background-color: var(--background-color);
+    color: var(--primary-font-color);
     font-style: bold;
     position: sticky;
     top: 0; /* Position header at the top */
     z-index: 2; /* Ensure the header stays above other content */
+    border-bottom: 1mm ridge var(--secondary-color);
+    // padding: 1vh;
+  
     
   }
 
   .col_1 {
     width: 20%;
+    vertical-align: top;
   }
 
   .col_2 {
@@ -39,110 +57,149 @@
     
   }
   tr:hover{
-    background-color: pink;
-    color: #012531;
+    background-color: var(--primary-color);
+    color: var(--primary-font-color);
   }
 
   .col_3 {
     width: 20%;
+    vertical-align: top;
   }
-  // .petrolStation{
-  //   padding: 1vh;
-  //   width: 100%;
-  // }
-  button{
-    cursor: pointer;
-    background-color: #FFF3DD; 
-    border-style: solid;
-    border-radius: 15px;
-    color: #012531;
-    padding: 2px;
-    margin: 1vh;
-    height: 100%;
-    width: 20%;
-  }
-  // .searchButton{
-  //   background-color: #953fc3; 
-  // }
+  
+ 
  
   .title{
-      color: #012531;
+      color: var(--primary-font-color);
   }
   .container{
     display: flex;
-    justify-content: center; /* Aligns items horizontally */
-    // align-items: center;   /* Aligns items vertically */
+    flex-direction: column;
     height: 100vh;  
     width: 100%;
-  }
-  .items{
-    display: flex;
     padding: 1vh;
-    color: #FFF3DD;
-    width: 70%;
+    margin: 0;
+  }
+  .searchInput{
+    background: none;
+    border-style: solid;
+    width: 85%;
+    height: 70%;
+    border-radius: 15px 0px 0px 15px;
+    border-color:var(--primary-color);
+    padding: 1vh;
+    // margin: 1vh;
+    // caret-color: red;
+    color: var(--primary-color);
+  }
+  .searchButton{
+    // cursor: pointer;
+    // background-color: var(--primary-color); 
+    // border-style: solid;
+    // border-color: var(--primary-color);
+    // border: none;
+    border-radius: 0px 5px 5px 0px;
+    // color: var(--primary-font-color);
+    // padding: 1vh;
+   
+    // height: 10vh;
+    // width: 15%;
+    // height: 70%;
+    // box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  }
+  button{
+    cursor: pointer;
+    background-color: var(--primary-color); 
+    // padding: 4px;
+    border-style: solid;
+    border-radius: 5px 15px 15px 5px;
+    color: white;
+    padding: 1vh;
+    // margin: 1vh;
+    // margin-left:auto;
+    margin-right: 1vh;
+    // border: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    width: 15%;
+    height: 70%;
+    font-size: vh;
+    // opacity: 50%;
   }
   
   ::placeholder {
-    color: #FFF3DD;
+    color: var(--primary-color);
     opacity: 50%;
   
   }
   .search{
     display: flex;
-  }
- 
-  .searchInput{
-    background: none;
-    border-style: solid;
-    width: 70%;
-    border-radius: 10px;
-    border-color:#FFF3DD;
+    width: 100%;
+    height: 10vh;
+    color: white;
+    align-items: center;
     padding: 1vh;
-    margin: 1vh;
-    // caret-color: red;
-    color: #FFF3DD;
+    margin:1vh;
   }
+//  .card{
+//   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+//   transition: 0.3s;
+//   border-radius: 1vh;
+//   padding:0;
+//  }
+
   .locationImg{
     width: 95%;
-    height: 95%;
+    height: 85%;
     
   }
   .searchImg{
-    width: 95%;
-    height: 95%;
+    width: 100%;
+    height: 110%;
+    // aspect-ratio: 1 / 1;
+    // align-self: ;
+    padding: 0;
   }
-  // .location{
-  //   background-color: #FFF3DD; 
-  //   border-style: solid;
-  //   border-radius: 15px;
-  //   color: #012531;
-  //   padding: 2px;
-  //   margin: 1vh;
-  //   height: 100%;
-  //   width: 15%;
-  // }
+
   
 
   .buttonOptions{
-    background-color: pink;
+    // background-color: var(--primary-color);
     display:flex;
+    // justify-content: center;
+    // align-items: center;
+    flex-direction: row;
+    justify-content: center;
     margin: 1vh;
+    width: 100%;
   }
+ .messageBG{
+  background-color: var(--background-color);
+  padding: 1vh;
+  margin-bottom:1vh;
+  border-radius: 8px;
+ }
 
+ 
   
   .selectMenu{
-    background-color: #FFF3DD; 
-    padding: 4px;
+    background-color: var(--secondary-color); 
+    // padding: 4px;
     border-style: solid;
     border-radius: 30px;
-    color: #012531;
+    color: white;
     padding: 1vh;
     margin: 1vh;
-    margin-left:auto;
+    // margin-left:auto;
+    border: none;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    align-self: center;
+  
   }
- 
+ .main{
+  padding: 0;
+ }
   .address{
-    color: #7493a3;
+    color: var(--secondary-color);
     font-style: italic;
     font-size: 1.5vh;
   }
@@ -150,42 +207,31 @@
   
   .header {
   
-    // border-top: none; /* Entfernen Sie diese Linie, wenn der Header direkt am oberen Rand sein soll */
-    width: 100%;
-    display: flex;
-    // flex-direction: row;
-   
-    align-items: center;
-    background-color: #FFF3DD; /* Hintergrundfarbe des Headers */
-    
-    // padding: 10px 20px; /* Sie hatten dies auskommentiert; stellen Sie sicher, dass es keine unbeabsichtigten Ränder gibt */
+     // border-top: none; /* Entfernen Sie diese Linie, wenn der Header direkt am oberen Rand sein soll */
+     width: 100%;
+     height: 3vh;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     // background-color: #FFF3DD; /* Hintergrundfarbe des Headers */
+     // background-color: #803B15;
+     margin: 0;
+     padding: 30px;
   }
-  .h1{
-    font-family: 'Arial', sans-serif;
-    margin: 10px 20px;
-    color: #012531;
-  }
-  
-  
 
+
+//   .brandLogo{
+// width: 100%;
+// height: 100%;
+//   }
  
-  .logo {
-    flex: 1; /* Logo nimmt den verfügbaren Platz auf der linken Seite ein */
-  }
-  
-  .logo img {
-    width: 100px; /* Stellen Sie die gewünschte Größe Ihres Logos ein */
-  }
-  .search{
-    width: 100%;
-  }
+  // .logo img {
+  //   width: 10%; /* Stellen Sie die gewünschte Größe Ihres Logos ein */
+  //   height: 10%;
+  //   // margin: 3vh;
+  // }
+ 
 
-  .left{
-    width: 50%;
-    margin: 1vh;
-  }
-
-  
   
  
   
