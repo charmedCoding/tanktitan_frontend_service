@@ -3,12 +3,14 @@
 @import "primeng/resources/primeng.css";
 
 html, body { 
-    background-image: url('/assets/tankTitan_01.png');
+    // background-image: radial-gradient(rgba(255, 49, 3, 0.896),
+    //                 rgba(251, 255, 0, 0.75)), url('/assets/tankTitan_01.png');
+    // background-image: url('/assets/tankTitan_01.png');
     background-size: 70%;
     background-position: top;
     background-repeat: no-repeat;
-    background-color:  #172027; 
-    // background: linear-gradient(to bottom, #172027, #1a232a, #1e272d, #212a31, #252e34);
+    // background-color:  #172027; 
+    background: linear-gradient(to bottom, #172027, #3C4F5D );
     margin: 0;
     padding: 0; 
     max-width: 100%;

@@ -1,4 +1,5 @@
 <main>
+  <div class="background-overlay">
   <!-- <img src="assets/tankTitan_01.png" alt="Firmenlogo" class ="brandLogo">  -->
   <!-- Header für Logo und Suchfeld -->
   <header class="header">
@@ -16,10 +17,7 @@
 <!-- <div class="items"> -->
   <div class="userInput">
   <section class="search">
-    <button (click)="locateMe()" class="locationButton" pTooltip="use your current location" 
-    tooltipPosition="top">
-      <img src="assets/location_white.png" alt="Button Image" class="locationImg"/>
-    </button>
+   
     <!-- <input type="text" placeholder="search address" (keydown.enter)="onEnter()" #addressInput class="searchInput"> -->
     <input type="text" placeholder="Stuttgart" (keydown.enter)="geocode(addressInput.value)" #addressInput class="searchInput" pTooltip="enter address" 
     tooltipPosition="top">
@@ -27,7 +25,10 @@
       <img src="assets/search_white.png" alt="Button Image" class="searchImg"/>
       
     </button>
-   
+    <button (click)="locateMe()" class="locationButton" pTooltip="use your current location" 
+    tooltipPosition="top">
+      <img src="assets/location_white.png" alt="Button Image" class="locationImg"/>
+    </button>
   
     
 </section>
@@ -60,11 +61,11 @@
   </div>
     
   </div>
-  <div id="map" style="width: 100%; height: 30%; padding: 8px;"></div>
-  <div class = "messageBG">
+  <div id="map" style="width: 100%; height: 30%; padding: 8px;border-radius: 1vh; margin-bottom: 1.5vh; margin-top:1.5vh;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);"></div>
+  <!-- <div class = "messageBG"> -->
   <p-messages [(value)]="messages1" [enableService]="false"/>
-</div>
-  <div class = "table-container">
+<!-- </div> -->
+  <div class = "table-container" *ngIf="stations.length !=0">
     
 
   
@@ -97,7 +98,7 @@
 
 
 
- 
+</div>
 
   <!-- </div> -->
 <!-- </div> -->

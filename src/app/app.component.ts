@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
 
   public ngOnInit() {
     this.loadAndDisplayMaps();
-    this.loadAndDisplayStations(48.7758, 9.1829);
+    // this.loadAndDisplayStations(48.7758, 9.1829);
      // Stuttgart coordinates
   }
 
