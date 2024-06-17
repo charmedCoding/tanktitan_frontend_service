@@ -19,15 +19,15 @@
   <section class="search">
    
     <!-- <input type="text" placeholder="search address" (keydown.enter)="onEnter()" #addressInput class="searchInput"> -->
-    <input type="text" placeholder="Stuttgart" (keydown.enter)="geocode(addressInput.value)" #addressInput class="searchInput" pTooltip="enter address" 
+    <input type="text" placeholder="Search address here" (keydown.enter)="geocode(addressInput.value)" #addressInput class="searchInput" pTooltip="enter address" 
     tooltipPosition="top">
     <button (click)="geocode(addressInput.value)" #submitButton class="searchButton">
-      <img src="assets/search_white.png" alt="Button Image" class="searchImg"/>
+      <img src="assets/search_white_03.png" alt="Button Image" class="searchImg"/>
       
     </button>
     <button (click)="locateMe()" class="locationButton" pTooltip="use your current location" 
     tooltipPosition="top">
-      <img src="assets/location_white.png" alt="Button Image" class="locationImg"/>
+      <img src="assets/location_white_02.png" alt="Button Image" class="locationImg"/>
     </button>
   
     
@@ -36,9 +36,9 @@
  
     <select id="fueType" class="selectMenu" (change)="onSelectFuel()" #fuelType pTooltip="fuel type" 
     tooltipPosition="top">
-      <option value="diesel">diesel</option>
-      <option value="e5">e5</option>
-      <option value="e10">e10</option>
+      <option value="diesel">Diesel</option>
+      <option value="e5">E 5</option>
+      <option value="e10">E 10</option>
     </select>
   
     <select id="radius" class="selectMenu" (change)="onSelectRadius()" #radius [value]="5" pTooltip="radius" 
@@ -53,8 +53,8 @@
     <select id="sort" class="selectMenu" (change)="onSelectSort()" #sort pTooltip="filter by cheapest prices or shortest distance" 
     tooltipPosition="top" >
       <!-- <option value="" disabled selected>Fuel</option>  -->
-      <option value="price">price</option>
-      <option value="dist">distance</option>
+      <option value="price">Price</option>
+      <option value="dist">Distance</option>
   
     </select>
 
