@@ -113,81 +113,142 @@ export class MapService {
     this.clearMarkers(); // Entferne vorherige Marker
 
     const request = {
-      location: location,
-      radius: radius,
-      type: 'gas_station',  
+        location: location,
+        radius: radius,
+        type: 'gas_station',
     };
 
+    let activeMarker: google.maps.Marker | null = null; // Verfolgen des aktiven Markers
+    let activeInfoWindow: google.maps.InfoWindow | null = null; // Verfolgen des aktiven InfoWindows
+
     this.placesService.nearbySearch(request, (results, status) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-        results.forEach(place => {
-          if (place.geometry && place.geometry.location) {
-            const marker = new google.maps.Marker({
-              position: place.geometry.location,
-              map: this.map,
-              title: place.name,
-              icon: {
-                url: 'assets/tank_titan_pin_primary.png', // Pfad zu Ihrem benutzerdefinierten Icon
-                scaledSize: new google.maps.Size(32, 32) // Größe des Icons anpassen
-              }
-            });
-            this.markers.push(marker); // Füge den neuen Marker zur Liste hinzu
+        if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+            results.forEach(place => {
+                if (place.geometry && place.geometry.location) { // Überprüfen Sie, ob place.geometry und place.geometry.location nicht undefined sind
+                    const marker = new google.maps.Marker({
+                        position: place.geometry.location,
+                        map: this.map,
+                        title: place.name,
+                        icon: {
+                            url: 'assets/tank_titan_pin_03.png', // Ursprüngliches Icon
+                            scaledSize: new google.maps.Size(32, 32) // Größe des Icons anpassen
+                        }
+                    });
+                    this.markers.push(marker); // Füge den neuen Marker zur Liste hinzu
 
-            const infowindow = new google.maps.InfoWindow({
-              content: `<div><strong>${place.name}</strong><br>
-                        Rating: ${place.rating}<br>
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=${place.geometry.location.lat()},${place.geometry.location.lng()}" target="_blank">Navigation</a></div>`
-            });
+                    const infowindow = new google.maps.InfoWindow({
+                        content: `<div><strong>${place.name}</strong><br>
+                                  Rating: ${place.rating || 'N/A'}<br>
+                                  <a href="https://www.google.com/maps/dir/?api=1&destination=${place.geometry.location.lat()},${place.geometry.location.lng()}" target="_blank">Navigation</a></div>`
+                    });
 
-            marker.addListener('click', () => {
-              if (place.geometry && place.geometry.location) {
-                const position = place.geometry.location;
-                this.map.setCenter(position);
-                this.map.setZoom(15);
-                infowindow.open(this.map, marker);
-              }
+                    marker.addListener('click', () => {
+                        // Setze den vorherigen aktiven Marker auf das ursprüngliche Icon zurück und schließe das InfoWindow
+                        if (activeMarker) {
+                            activeMarker.setIcon({
+                                url: 'assets/tank_titan_pin_03.png',
+                                scaledSize: new google.maps.Size(32, 32)
+                            });
+                        }
+                        if (activeInfoWindow) {
+                            activeInfoWindow.close();
+                        }
+
+                        // Setze den aktuellen Marker als aktiv und ändere das Icon
+                        activeMarker = marker;
+                        activeInfoWindow = infowindow;
+
+                        marker.setIcon({
+                            url: 'assets/tank_titan_pin_primary.png',
+                            scaledSize: new google.maps.Size(32, 32)
+                        });
+
+                        // Öffne das neue InfoWindow und setze die Karte auf die Position des Markers
+                        const position = place.geometry!.location; // place.geometry ist hier sicher nicht undefined
+                        if (position) {
+                            this.map.setCenter(position as google.maps.LatLng);
+                            this.map.setZoom(15);
+                            infowindow.open(this.map, marker);
+                        }
+                    });
+
+                    marker.setMap(this.map);
+                }
             });
-          }
-        });
-      } else {
-        console.error('Places search failed due to: ' + status);
-      }
+        } else {
+            console.error('Places search failed due to: ' + status);
+        }
     });
-  }
+}
+addMarkers(stations: any[]): void {
+  this.clearMarkers(); // Entferne vorherige Marker
 
-  addMarkers(stations: any[]): void {
-    this.clearMarkers(); // Entferne vorherige Marker
+  if (this.map) {
+      const addedLocations = new Set<string>(); // Set, um hinzugefügte Standorte zu verfolgen
+      const tolerance = 0.0001; // Toleranz für Positionsgenauigkeit
+      let activeMarker: google.maps.Marker | null = null; // Verfolgen des aktiven Markers
+      let activeInfoWindow: google.maps.InfoWindow | null = null; // Verfolgen des aktiven InfoWindows
 
-    if (this.map) {
       stations.forEach(station => {
-        const marker = new google.maps.Marker({
-          position: { lat: station.lat, lng: station.lng },
-          map: this.map,
-          title: station.name,
-          icon: {
-            url: 'assets/tank_titan_pin_03.png', 
-            scaledSize: new google.maps.Size(50, 50) 
+          const isDuplicate = Array.from(addedLocations).some(key => {
+              const [lat, lng] = key.split('-').map(Number);
+              return Math.abs(lat - station.lat) < tolerance && Math.abs(lng - station.lng) < tolerance;
+          });
+
+          if (!isDuplicate) {
+              const locationKey = `${station.lat}-${station.lng}`; // Einzigartiger Schlüssel für jeden Standort
+              addedLocations.add(locationKey); // Standort als hinzugefügt markieren
+
+              const marker = new google.maps.Marker({
+                  position: { lat: station.lat, lng: station.lng },
+                  map: this.map,
+                  title: station.name,
+                  icon: {
+                      url: 'assets/tank_titan_pin_03.png',
+                      scaledSize: new google.maps.Size(50, 50)
+                  }
+              });
+              this.markers.push(marker); // Füge den neuen Marker zur Liste hinzu
+
+              const infowindow = new google.maps.InfoWindow({
+                  content: `<div><strong>${station.name}</strong><br>
+                            Rating: ${station.rating || 'N/A'}<br>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=${station.lat},${station.lng}" target="_blank">Navigation</a></div>`
+              });
+
+              marker.addListener('click', () => {
+                  // Setze den vorherigen aktiven Marker auf das ursprüngliche Icon zurück und schließe das InfoWindow
+                  if (activeMarker) {
+                      activeMarker.setIcon({
+                          url: 'assets/tank_titan_pin_03.png',
+                          scaledSize: new google.maps.Size(50, 50)
+                      });
+                  }
+                  if (activeInfoWindow) {
+                      activeInfoWindow.close();
+                  }
+
+                  // Setze den aktuellen Marker als aktiv und ändere das Icon
+                  activeMarker = marker;
+                  activeInfoWindow = infowindow;
+
+                  marker.setIcon({
+                      url: 'assets/tank_titan_pin_primary.png',
+                      scaledSize: new google.maps.Size(50, 50)
+                  });
+
+                  // Öffne das neue InfoWindow und setze die Karte auf die Position des Markers
+                  const position = new google.maps.LatLng(station.lat, station.lng);
+                  this.map.setCenter(position);
+                  this.map.setZoom(15);
+                  infowindow.open(this.map, marker);
+              });
+
+              marker.setMap(this.map);
           }
-        });
-        this.markers.push(marker); // Füge den neuen Marker zur Liste hinzu
-
-        const infowindow = new google.maps.InfoWindow({
-          content: `<div><strong>${station.name}</strong><br>
-                    Rating: ${station.rating}<br>
-                    <a href="https://www.google.com/maps/dir/?api=1&destination=${station.lat},${station.lng}" target="_blank">Navigation</a></div>`
-        });
-
-        marker.addListener('click', () => {
-          const position = new google.maps.LatLng(station.lat, station.lng);
-          this.map.setCenter(position);
-          this.map.setZoom(15);
-          infowindow.open(this.map, marker);
-        });
-
-        marker.setMap(this.map);
       });
-    } else {
+  } else {
       console.error('Map not initialized');
-    }
   }
+}
 }
