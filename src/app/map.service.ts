@@ -15,7 +15,6 @@ export class MapService {
   private geocoder!: google.maps.Geocoder;
   private placesService!: google.maps.places.PlacesService;
   private markers: google.maps.Marker[] = [];
-  selectedMarker!: google.maps.Marker | null;
 
   constructor(private http: HttpClient) {
     this.loader = new Loader({
@@ -131,7 +130,7 @@ export class MapService {
                         map: this.map,
                         title: place.name,
                         icon: {
-                            url: 'assets/tank_titan_pin_02.png', // Ursprüngliches Icon
+                            url: 'assets/tank_titan_pin_03.png', // Ursprüngliches Icon
                             scaledSize: new google.maps.Size(32, 32) // Größe des Icons anpassen
                         }
                     });
@@ -147,7 +146,7 @@ export class MapService {
                         // Setze den vorherigen aktiven Marker auf das ursprüngliche Icon zurück und schließe das InfoWindow
                         if (activeMarker) {
                             activeMarker.setIcon({
-                                url: 'assets/tank_titan_pin_02.png',
+                                url: 'assets/tank_titan_pin_03.png',
                                 scaledSize: new google.maps.Size(32, 32)
                             });
                         }
@@ -160,7 +159,7 @@ export class MapService {
                         activeInfoWindow = infowindow;
 
                         marker.setIcon({
-                            url: 'assets/tank_titan_pin_04.png',
+                            url: 'assets/tank_titan_pin_primary.png',
                             scaledSize: new google.maps.Size(32, 32)
                         });
 
@@ -205,7 +204,7 @@ addMarkers(stations: any[]): void {
                   map: this.map,
                   title: station.name,
                   icon: {
-                      url: 'assets/tank_titan_pin_02.png',
+                      url: 'assets/tank_titan_pin_03.png',
                       scaledSize: new google.maps.Size(50, 50)
                   }
               });
@@ -234,7 +233,7 @@ addMarkers(stations: any[]): void {
                   activeInfoWindow = infowindow;
 
                   marker.setIcon({
-                      url: 'assets/tank_titan_pin_04.png',
+                      url: 'assets/tank_titan_pin_primary.png',
                       scaledSize: new google.maps.Size(50, 50)
                   });
 
