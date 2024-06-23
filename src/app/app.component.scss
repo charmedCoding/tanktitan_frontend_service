@@ -57,7 +57,7 @@
     border-style: solid;
     border-radius: 5px 15px 15px 5px;
     color: white;
-    padding: 1vh;
+    padding: 0.5vh;
     margin-right: 1vh;
     border-color: var(--primary-color);
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
@@ -101,7 +101,6 @@
     object-fit: contain; /* Maintain aspect ratio and fit within the button */
     display: block; /* Ensure the image takes up the full space */
   }
-
   
 
   .buttonOptions{
@@ -134,7 +133,7 @@
   padding: 0;
  }
   .address{
-    color: var(--secondary-color);
+    color: var(--third-color);
     font-style: italic;
     font-size: 1.5vh;
   }
